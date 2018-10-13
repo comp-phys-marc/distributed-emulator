@@ -1,0 +1,44 @@
+version: '2'
+services:
+    rabbit:
+        hostname: rabbit
+        image: rabbitmq:latest
+        environment:
+            - RABBITMQ_DEFAULT_USER=SA
+            - RABBITMQ_DEFAULT_PASS=tercesdeqmis
+        ports:
+            - "5673:5672"
+    userservice:
+        build:
+            context: ./userservice/
+            dockerfile: ./userservice/dockerfile
+        volumes:
+            - ./userservice/app
+        links:
+            - rabbit
+            - apiservice
+        depends_on:
+            - rabbit
+            - apiservice
+    simulationservice:
+        build:
+            context: ./simulationservice/
+            dockerfile: ./simulationservice/dockerfile
+        volumes:
+            - ./simulationservice/app
+        links:
+            - rabbit
+            - apiservice
+        depends_on:
+            - rabbit
+            - apiservice
+    apiservice:
+        build:
+            context: ./apiservice/
+            dockerfile: ./apiservice/dockerfile
+        volumes:
+            - ./apiservice/app
+        links:
+            - rabbit
+        depends_on:
+            - rabbit
