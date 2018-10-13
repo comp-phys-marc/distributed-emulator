@@ -9,7 +9,7 @@ A container for all the services' repositories which are registered as submodule
 ### Cloning:
 
 ```
-git clone https://gitlab.com/QuantumEulator/distributedemulator.git --recurse-submodules
+git clone https://gitlab.com/QuantumEmulator/distributedemulator.git --recurse-submodules
 ```
 
 ### Submodules
@@ -99,7 +99,7 @@ sudo apt-get update && sudo apt-get install google-cloud-sdk
 
 gcloud init
 
-gcloud components install kubectl
+sudo apt-get install kubectl
 
 gcloud config set project emulator-219302
 gcloud config set compute/zone us-central1-b
