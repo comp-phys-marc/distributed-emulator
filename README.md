@@ -99,10 +99,14 @@ sudo apt-get update && sudo apt-get install google-cloud-sdk
 
 gcloud init
 
-sudo apt-get install kubectl
-
 gcloud config set project emulator-219302
 gcloud config set compute/zone us-central1-b
+```
+
+### Install Kubernetes
+
+```
+sudo apt-get install kubectl
 ```
 
 ### Install Docker:
@@ -125,13 +129,20 @@ sudo apt-get install docker-ce
 gcloud auth configure-docker
 ```
 
-### Intall Git:
+### Install docker compose
+
+```
+sudo curl -L "https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+```
+
+### Install Git:
 
 ```
 apt-get install git
 ```
 
-##Building images
+## Building images
 
 ```
 export PROJECT_ID="$(gcloud config get-value project -q)"
@@ -152,31 +163,31 @@ docker push gcr.io/${PROJECT_ID}/apiservice:v1
 
 ## Google Kubernetes
 
-###Creating a GKE cluster
+### Creating a GKE cluster
 
 ```
 gcloud container clusters create qedemucluster --num-nodes=5
 ```
 
-###Deploying a cluster
+### Deploying a cluster
 
 ```
 kubectl run qedsim-deployment --image=gcr.io/${PROJECT_ID}/simulationservice:v1 --port 8080
 ```
 
-###Exposing a cluster
+### Exposing a cluster
 
 ```
 kubectl expose deployment qedsim-deployment --type=LoadBalancer --port 80 --target-port 8080
 ```
 
-###Scaling a cluster
+### Scaling a cluster
 
 ```
 kubectl scale deployment qedsim-deployment --replicas=3
 ```
 
-###Updating cluster
+### Updating cluster
 
 ```
 docker build -t gcr.io/${PROJECT_ID}/simulationservice:v2 .
@@ -184,15 +195,15 @@ gcloud docker -- push gcr.io/${PROJECT_ID}/simulationservice:v2
 kubectl set image deployment/qedsim-deployment qedsim-deployment=gcr.io/${PROJECT_ID}/simulationservice:v2
 ```
 
-##Remote access
+## Remote access
 
-###Connecting to the PSQL database
+### Connecting to the PSQL database
 ```
 psql -d qedemudb -h 35.238.0.219 -p 5432 -U postgress
 password: tercesdeqmis
 ```
 
-###Connecting to the hosted RabbitMQ instance
+### Connecting to the hosted RabbitMQ instance
 ```
 gcloud compute --project "emulator-219302" ssh --zone "us-east1-b" "qedrabbit"
 ```
