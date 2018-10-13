@@ -1,0 +1,9 @@
+[submodule "userservice"]
+	path = userservice
+	url = https://gitlab.com/QuantumEmulator/userservice.git
+[submodule "apiservice"]
+	path = apiservice
+	url = https://gitlab.com/QuantumEmulator/apiservice.git
+[submodule "simulationservice"]
+	path = simulationservice
+	url = https://gitlab.com/QuantumEmulator/simulationservice.git
