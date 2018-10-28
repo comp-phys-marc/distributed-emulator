@@ -2,7 +2,7 @@ version: '2'
 services:
     rabbit:
         hostname: rabbit
-        image: rabbitmq:latest
+        image: rabbitmq:latest:
         environment:
             - RABBITMQ_DEFAULT_USER=SA
             - RABBITMQ_DEFAULT_PASS=tercesdeqmis

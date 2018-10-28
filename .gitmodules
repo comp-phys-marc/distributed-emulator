@@ -7,3 +7,6 @@
 [submodule "simulationservice"]
 	path = simulationservice
 	url = https://gitlab.com/QuantumEmulator/simulationservice.git
+[submodule "analysisservice"]
+	path = analysisservice
+	url = https://gitlab.com/QuantumEmulator/analysisservice.git
