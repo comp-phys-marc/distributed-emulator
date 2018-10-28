@@ -67,10 +67,9 @@ sudo rabbitmqctl set_user_tags SA administrator
 sudo rabbitmqctl set_permissions -p / SA ".*" ".*" ".*"
 ```
 
-### Spinning up locally:
+### building images locally:
 
 ```
-docker pull rabbitmq:latest
 docker-compose build
 ```
 
