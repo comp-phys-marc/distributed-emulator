@@ -4,6 +4,12 @@ A container for all the services' repositories which are registered as submodule
 
 # Setup
 
+### Install Git:
+
+```
+apt-get install git
+```
+
 ## Repository
 
 ### Cloning:
@@ -135,12 +141,6 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.22.0/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 ```
 
-### Install Git:
-
-```
-apt-get install git
-```
-
 ## Building images
 
 ```
@@ -155,9 +155,13 @@ docker build -t gcr.io/${PROJECT_ID}/userservice:v1 .
 cd ../simulationservice
 docker build -t gcr.io/${PROJECT_ID}/simulationservice:v1 .
 
+cd ../analysisservice
+docker build -t gcr.io/${PROJECT_ID}/analysisservice:v1 .
+
 docker push gcr.io/${PROJECT_ID}/simulationservice:v1
 docker push gcr.io/${PROJECT_ID}/userservice:v1
 docker push gcr.io/${PROJECT_ID}/apiservice:v1
+docker push gcr.io/${PROJECT_ID}/analysisservice:v1
 ```
 
 ## Google Kubernetes
@@ -165,36 +169,43 @@ docker push gcr.io/${PROJECT_ID}/apiservice:v1
 ### Creating a GKE cluster
 
 ```
-gcloud container clusters create qedemucluster --num-nodes=5
+gcloud container clusters create qedemucluster --num-nodes=4
 ```
 
 ### Deploying a cluster
 
 ```
-kubectl run qedsim-deployment --image=gcr.io/${PROJECT_ID}/simulationservice:v1 --port 8080
+kubectl run qedsimulation-deployment --image=gcr.io/${PROJECT_ID}/simulationservice:v1 --port 8080
 ```
 
 ### Exposing a cluster
 
 ```
-kubectl expose deployment qedsim-deployment --type=LoadBalancer --port 80 --target-port 8080
+kubectl expose deployment qedsimulation-deployment --type=LoadBalancer --port 80 --target-port 8080
 ```
 
 ### Scaling a cluster
 
 ```
-kubectl scale deployment qedsim-deployment --replicas=3
-```
-
-### Updating cluster
-
-```
-docker build -t gcr.io/${PROJECT_ID}/simulationservice:v2 .
-gcloud docker -- push gcr.io/${PROJECT_ID}/simulationservice:v2
-kubectl set image deployment/qedsim-deployment qedsim-deployment=gcr.io/${PROJECT_ID}/simulationservice:v2
+kubectl scale deployment qedsimulation-deployment --replicas=3
 ```
 
 ## Remote access
+
+### Configure RabbitMQ compute engine firewall
+
+
+Expose amqp port
+```
+gcloud compute firewall-rules create rule-allow-tcp-5672 --source-ranges 0.0.0.0/0 --target-tags allow-tcp-5672 --allow tcp:5672
+gcloud compute instances add-tags qedrabbit --zone us-east1-b --tags allow-tcp-5672
+```
+
+Expose management UI
+```
+gcloud compute firewall-rules create rule-allow-tcp-15672 --source-ranges 0.0.0.0/0 --target-tags allow-tcp-15672 --allow tcp:15672
+gcloud compute instances add-tags qedrabbit --zone us-east1-b --tags allow-tcp-15672
+```
 
 ### Connecting to the PSQL database
 ```
