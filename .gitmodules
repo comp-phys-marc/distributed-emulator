@@ -10,3 +10,9 @@
 [submodule "analysisservice"]
 	path = analysisservice
 	url = https://gitlab.com/QuantumEmulator/analysisservice.git
+[submodule "circuitservice"]
+	path = circuitservice
+	url = https://gitlab.com/QuantumEmulator/circuitservice.git
+[submodule "quantumemulatorhardwarecli"]
+	path = quantumemulatorhardwarecli
+	url = https://gitlab.com/QuantumEmulator/quantumemulatorhardwarecli.git
