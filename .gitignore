@@ -1,6 +1,2 @@
 .idea
 venv
-lib
-bin
-include
-.Python
