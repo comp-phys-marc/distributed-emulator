@@ -41,7 +41,7 @@ sudo apt-get install postgresql-client
 pip install virtualenv
 pip install virtualenvwrapper
 cd venv
-virtualenv .
+virtualenv . --python=python3.7
 ```
 
 ## Activate the virtualenv:
@@ -104,7 +104,7 @@ sudo apt-get update && sudo apt-get install google-cloud-sdk
 
 gcloud init
 
-gcloud config set project emulator-219302
+gcloud config set project beaming-signal-231717
 gcloud config set compute/zone us-central1-b
 ```
 
@@ -194,26 +194,29 @@ kubectl scale deployment qedsimulation-deployment --replicas=3
 
 ### Configure RabbitMQ compute engine firewall
 
-
 Expose amqp port
+
 ```
 gcloud compute firewall-rules create rule-allow-tcp-5672 --source-ranges 0.0.0.0/0 --target-tags allow-tcp-5672 --allow tcp:5672
 gcloud compute instances add-tags qedrabbit --zone us-east1-b --tags allow-tcp-5672
 ```
 
 Expose management UI
+
 ```
 gcloud compute firewall-rules create rule-allow-tcp-15672 --source-ranges 0.0.0.0/0 --target-tags allow-tcp-15672 --allow tcp:15672
 gcloud compute instances add-tags qedrabbit --zone us-east1-b --tags allow-tcp-15672
 ```
 
 ### Connecting to the PSQL database
+
 ```
-psql -d qedemudb -h 35.238.0.219 -p 5432 -U postgress
+gcloud sql connect qedemudb --user=postgres --quiet
 password: tercesdeqmis
 ```
 
 ### Connecting to the hosted RabbitMQ instance
+
 ```
-gcloud compute --project "emulator-219302" ssh --zone "us-east1-b" "qedrabbit"
+gcloud compute --project "beaming-signal-231717" ssh --zone "us-east1-b" "qedrabbit"
 ```
