@@ -97,30 +97,6 @@ CREATE TABLE public."User" (
 
 
 --
--- Data for Name: Calculation; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY public."Calculation" (id, user_id, result, type) FROM stdin;
-\.
-
-
---
--- Data for Name: SinglePhase; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY public."SinglePhase" (id, calculation_id, phase, previous_phase_id, states, negative_flags, imaginary_flags) FROM stdin;
-\.
-
-
---
--- Data for Name: User; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY public."User" (id, name, email, password, companyname, phone) FROM stdin;
-\.
-
-
---
 -- Name: calculation_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -145,24 +121,21 @@ SELECT pg_catalog.setval('public.user_seq', 1, false);
 -- Name: Calculation Calculation_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public."Calculation"
-    ADD CONSTRAINT "Calculation_pkey" PRIMARY KEY (id);
+ALTER TABLE ONLY public."Calculation" ADD CONSTRAINT "Calculation_pkey" PRIMARY KEY (id);
 
 
 --
 -- Name: SinglePhase SinglePhase_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public."SinglePhase"
-    ADD CONSTRAINT "SinglePhase_pkey" PRIMARY KEY (id);
+ALTER TABLE ONLY public."SinglePhase" ADD CONSTRAINT "SinglePhase_pkey" PRIMARY KEY (id);
 
 
 --
 -- Name: User User_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public."User"
-    ADD CONSTRAINT "User_pkey" PRIMARY KEY (id);
+ALTER TABLE ONLY public."User" ADD CONSTRAINT "User_pkey" PRIMARY KEY (id);
 
 
 --

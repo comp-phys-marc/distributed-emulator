@@ -146,6 +146,7 @@ Mac
 
 ```
 https://download.docker.com/mac/beta/Docker.dmg
+gcloud auth configure-docker
 ```
 
 Ubuntu
@@ -198,27 +199,44 @@ docker push gcr.io/${PROJECT_ID}/apiservice:v1
 docker push gcr.io/${PROJECT_ID}/analysisservice:v1
 ```
 
+## Google Container Engine
+
+### Deploying an image
+
+```
+gcloud compute instances create-with-container qedsimulation \
+     --container-image gcr.io/${PROJECT_ID}/simulationservice:v1
+```
+
+## Updating a container
+
+```
+gcloud compute instances update-container qedsimulation \
+    --container-image gcr.io/${PROJECT_ID}/simulationservice:v2
+```
+
 ## Google Kubernetes
 
 ### Creating a GKE cluster
 
 ```
 gcloud container clusters create qedemucluster --num-nodes=4
+gcloud container clusters get-credentials qedemucluster
 ```
 
-### Deploying a cluster
+### Deploying an image
 
 ```
 kubectl run qedsimulation-deployment --image=gcr.io/${PROJECT_ID}/simulationservice:v1 --port 8080
 ```
 
-### Exposing a cluster
+### Exposing a deployment
 
 ```
-kubectl expose deployment qedsimulation-deployment --type=LoadBalancer --port 80 --target-port 8080
+kubectl expose deployment qedsimulation-deployment --port 80 --target-port 8080
 ```
 
-### Scaling a cluster
+### Scaling a deployment
 
 ```
 kubectl scale deployment qedsimulation-deployment --replicas=3
@@ -244,12 +262,14 @@ gcloud compute instances add-tags qedrabbit --zone us-east1-b --tags allow-tcp-1
 
 ### Connecting to the PSQL database
 
+You must connect from an authorized IP.
+
 ```
-gcloud sql connect qedemudb --user=postgres --quiet
+psql -h 35.227.110.153 -U postgres
 password: tercesdeqmis
 ```
 
-### Connecting to the hosted RabbitMQ instance
+### Connecting to a hosted container
 
 ```
 gcloud compute --project "beaming-signal-231717" ssh --zone "us-east1-b" "qedrabbit"
