@@ -166,13 +166,28 @@ ALTER TABLE ONLY public."User"
 
 
 --
--- Name: SCHEMA public; Type: ACL; Schema: -; Owner: -
+-- Create Users
 --
 
-REVOKE ALL ON SCHEMA public FROM cloudsqladmin;
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-GRANT ALL ON SCHEMA public TO cloudsqlsuperuser;
-GRANT ALL ON SCHEMA public TO PUBLIC;
+CREATE USER userservice;
+ALTER USER userservice with password 'tercesresudeqmis';
+GRANT ALL ON TABLE "User" to userservice;
+GRANT ALL ON SEQUENCE user_seq TO userservice;
+
+CREATE USER simulationservice;
+ALTER USER simulationservice with password 'tercesumisdeqmis';
+GRANT ALL ON TABLE "Calculation" to simulationservice;
+GRANT ALL ON TABLE "SinglePhase" to simulationservice;
+GRANT ALL ON SEQUENCE calculation_seq TO simulationservice;
+GRANT ALL ON SEQUENCE single_phase_seq TO simulationservice;
+
+
+CREATE USER analysisservice;
+ALTER USER analysisservice with password 'terceslanadeqmis';
+GRANT ALL ON TABLE "Calculation" to analysisservice;
+GRANT ALL ON TABLE "SinglePhase" to analysisservice;
+GRANT ALL ON SEQUENCE single_phase_seq TO analysisservice;
+GRANT ALL ON SEQUENCE calculation_seq TO analysisservice;
 
 
 --

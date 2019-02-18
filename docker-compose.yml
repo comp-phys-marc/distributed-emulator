@@ -26,13 +26,13 @@ services:
             dockerfile: dockerfile
         volumes:
             - ./apiservice/app
-    analysisservice:
-        build:
-            context: ./analysisservice/
-            dockerfile: dockerfile
-        volumes:
-            - ./analysisservice/app
-        links:
-            - apiservice
-        depends_on:
-            - apiservice
+#    analysisservice:
+#        build:
+#            context: ./analysisservice/
+#            dockerfile: dockerfile
+#        volumes:
+#            - ./analysisservice/app
+#        links:
+#            - apiservice
+#        depends_on:
+#            - apiservice

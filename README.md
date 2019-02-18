@@ -30,6 +30,15 @@ git submodule update --init --recursive
 
 ## Install PSQL Client:
 
+Mac
+
+```
+brew install postgresql
+pg_ctl -D /usr/local/var/postgres start && brew services start postgresql
+```
+
+Ubuntu
+
 ```
 sudo apt-get update
 sudo apt-get install postgresql-client
@@ -89,6 +98,15 @@ docker-compose scale simulationservice=5
 
 ### Install gcloud
 
+Mac
+
+```
+https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-234.0.0-darwin-x86_64.tar.gz
+./google-cloud-sdk/install.sh
+```
+
+Ubuntu
+
 ```
 # Create environment variable for correct distribution
 export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
@@ -110,11 +128,27 @@ gcloud config set compute/zone us-central1-b
 
 ### Install Kubernetes
 
+Mac
+ 
+```
+brew install kubernetes-cli
+```
+
+Ubuntu
+
 ```
 sudo apt-get install kubectl
 ```
 
 ### Install Docker:
+
+Mac
+
+```
+https://download.docker.com/mac/beta/Docker.dmg
+```
+
+Ubuntu
 
 ```
 sudo apt-get update
