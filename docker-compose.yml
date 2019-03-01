@@ -6,26 +6,18 @@ services:
             dockerfile: dockerfile
         volumes:
             - ./userservice/app
-        links:
-            - apiservice
-        depends_on:
-            - apiservice
     simulationservice:
         build:
             context: ./simulationservice/
             dockerfile: dockerfile
         volumes:
             - ./simulationservice/app
-        links:
-            - apiservice
-        depends_on:
-            - apiservice
-    apiservice:
-        build:
-            context: ./apiservice/
-            dockerfile: dockerfile
-        volumes:
-            - ./apiservice/app
+#    apiservice:
+#        build:
+#            context: ./apiservice/
+#            dockerfile: dockerfile
+#        volumes:
+#            - ./apiservice/app
 #    analysisservice:
 #        build:
 #            context: ./analysisservice/

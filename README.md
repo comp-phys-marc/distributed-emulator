@@ -4,7 +4,7 @@ A container for all the services' repositories which are registered as submodule
 
 # Setup
 
-### Install Git:
+### Install Git
 
 ```
 apt-get install git
@@ -12,7 +12,7 @@ apt-get install git
 
 ## Repository
 
-### Cloning:
+### Cloning
 
 ```
 git clone https://gitlab.com/QuantumEmulator/distributedemulator.git --recurse-submodules
@@ -20,7 +20,7 @@ git clone https://gitlab.com/QuantumEmulator/distributedemulator.git --recurse-s
 
 ### Submodules
 
-### Updating submodules:
+### Updating submodules
 
 ```
 git submodule update --init --recursive
@@ -28,7 +28,7 @@ git submodule update --init --recursive
 
 ## Local development
 
-## Install PSQL Client:
+## Install PSQL Client
 
 Mac
 
@@ -44,22 +44,22 @@ sudo apt-get update
 sudo apt-get install postgresql-client
 ```
 
-## Setup the virtualenv:
+## Setup the virtualenv
 
 ```
 pip install virtualenv
 pip install virtualenvwrapper
 cd venv
-virtualenv . --python=python3.7
+virtualenv . --python=python3
 ```
 
-## Activate the virtualenv:
+## Activate the virtualenv
 
 ```
 source venv/bin/activate
 ```
 
-## Install and start RabbitMQ:
+## Install and start RabbitMQ
 
 ```
 sudo apt-get update
@@ -82,19 +82,19 @@ sudo rabbitmqctl set_user_tags SA administrator
 sudo rabbitmqctl set_permissions -p / SA ".*" ".*" ".*"
 ```
 
-### building images locally:
+### building images locally
 
 ```
 docker-compose build
 ```
 
-### Scaling locally:
+### Scaling locally
 
 ```
 docker-compose scale simulationservice=5
 ```
 
-## Deployment tools setup:
+## Deployment tools setup
 
 ### Install gcloud
 
@@ -273,4 +273,41 @@ password: tercesdeqmis
 
 ```
 gcloud compute --project "beaming-signal-231717" ssh --zone "us-east1-b" "qedrabbit"
+```
+
+## Exposing API container
+
+```
+gcloud compute firewall-rules create rule-allow-tcp-5000 --source-ranges 0.0.0.0/0 --target-tags allow-tcp-5000 --allow tcp:5000
+gcloud compute instances add-tags qedapi --zone us-east4-c --tags allow-tcp-5000
+```
+
+# Manual Deployment
+
+## Api service setup
+
+From inside fresh GCP container:
+
+```
+sudo apt-get update
+sudo apt-get install git
+git clone https://gitlab.com/QuantumEmulator/apiservice.git
+sudo apt-get upgrade python3.6
+sudo apt-get install python3-setuptools
+sudo easy_install3 pip
+cd apiservice
+sudo pip3 install -r requirements.txt
+git submodule update --init --recursive
+pyhton3 app.py
+```
+
+# Rust development
+
+## Setup
+
+Mac
+
+```
+brew install rustup
+rustup-init
 ```
