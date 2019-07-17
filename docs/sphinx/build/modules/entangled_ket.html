@@ -1,0 +1,127 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>EntangledKet &#8212; QEDlib 0.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Ket" href="ket.html" />
+    <link rel="prev" title="Entanglement" href="entanglement.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="entangledket">
+<h1>EntangledKet<a class="headerlink" href="#entangledket" title="Permalink to this headline">¶</a></h1>
+<p><strong>EntangledKet</strong> is a class that extends the <em>Ket</em> class. An <em>EntangledKet</em> object <em>entangled_ket</em> has a list <em>entangled_ket._entanglements</em> of <em>Entanglement</em> objects.</p>
+<p><strong>entangled_ket.entangle (self, outcome, system, qubit) → ()</strong> adds an <em>EntangledKet</em> object to the list <em>self._entanglements</em> with the given initialization parameters.</p>
+<p><strong>entangled_ket.is_entangled_with (self, system, qubit) → (is_entangled)</strong> determines whether the existence of a <em>ket</em> is predicated upon entanglement effects related to the given qubit by checking each element of <em>self._entanglements</em>.</p>
+<p><strong>entangled_ket.should_collapse (self, outcome, system, qubit) → (should_collapse)</strong> determines whether the <em>ket</em> should collapse and disappear following a measurement of the given <em>qubit</em> yielding the given <em>outcome</em>.</p>
+<p><strong>entangled_ket.copy_entanglement_to (self, other_ket) → ()</strong> creates and adds a <em>Entanglement</em> instance to other_ket._entanglements by calling <em>other_ket.entangle</em> $; forall entanglement in self._entanglements$.</p>
+<p><strong>entangled_ket.h (self, qubit) → (self)</strong> performs a Hadamard gate on the target qubit and propagates entanglements to newly created <em>Ket</em> objects.</p>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">QEDlib</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ensemble.html">Ensemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entanglement.html">Entanglement</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">EntangledKet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ket.html">Ket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html">Parent Repository (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dep.html">Deploy Tools (Bash)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sim.html">Simulation Service (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user.html">User Service (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Api Service (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rust.html">Rust development</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="entanglement.html" title="previous chapter">Entanglement</a></li>
+      <li>Next: <a href="ket.html" title="next chapter">Ket</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Marcus Edwards.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/modules/entangled_ket.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

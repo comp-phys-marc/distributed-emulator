@@ -1,0 +1,160 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Api Service (Python) &#8212; QEDlib 0.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Rust development" href="rust.html" />
+    <link rel="prev" title="User Service (Python)" href="user.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="api-service-python">
+<h1>Api Service (Python)<a class="headerlink" href="#api-service-python" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="api-setup">
+<h2>Api Setup<a class="headerlink" href="#api-setup" title="Permalink to this headline">¶</a></h2>
+<p>To install all requirements:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>To start the service:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">run</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="exposing-api-container">
+<h2>Exposing API container<a class="headerlink" href="#exposing-api-container" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">compute</span> <span class="n">firewall</span><span class="o">-</span><span class="n">rules</span> <span class="n">create</span> <span class="n">rule</span><span class="o">-</span><span class="n">allow</span><span class="o">-</span><span class="n">tcp</span><span class="o">-</span><span class="mi">5000</span> <span class="o">--</span><span class="n">source</span><span class="o">-</span><span class="n">ranges</span> <span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">0</span> <span class="o">--</span><span class="n">target</span><span class="o">-</span><span class="n">tags</span> <span class="n">allow</span><span class="o">-</span><span class="n">tcp</span><span class="o">-</span><span class="mi">5000</span> <span class="o">--</span><span class="n">allow</span> <span class="n">tcp</span><span class="p">:</span><span class="mi">5000</span>
+<span class="n">gcloud</span> <span class="n">compute</span> <span class="n">instances</span> <span class="n">add</span><span class="o">-</span><span class="n">tags</span> <span class="n">qedapi</span> <span class="o">--</span><span class="n">zone</span> <span class="n">us</span><span class="o">-</span><span class="n">east4</span><span class="o">-</span><span class="n">c</span> <span class="o">--</span><span class="n">tags</span> <span class="n">allow</span><span class="o">-</span><span class="n">tcp</span><span class="o">-</span><span class="mi">5000</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="api-service-setup">
+<h2>Api service setup<a class="headerlink" href="#api-service-setup" title="Permalink to this headline">¶</a></h2>
+<p>From inside fresh GCP container:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">git</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">gitlab</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">QuantumEmulator</span><span class="o">/</span><span class="n">apiservice</span><span class="o">.</span><span class="n">git</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">upgrade</span> <span class="n">python3</span><span class="o">.</span><span class="mi">6</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python3</span><span class="o">-</span><span class="n">setuptools</span>
+<span class="n">sudo</span> <span class="n">easy_install3</span> <span class="n">pip</span>
+<span class="n">cd</span> <span class="n">apiservice</span>
+<span class="n">sudo</span> <span class="n">pip3</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">git</span> <span class="n">submodule</span> <span class="n">update</span> <span class="o">--</span><span class="n">init</span> <span class="o">--</span><span class="n">recursive</span>
+<span class="n">pyhton3</span> <span class="n">app</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">QEDlib</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ensemble.html">Ensemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entanglement.html">Entanglement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entangled_ket.html">EntangledKet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ket.html">Ket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html">Parent Repository (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dep.html">Deploy Tools (Bash)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sim.html">Simulation Service (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user.html">User Service (Python)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Api Service (Python)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#api-setup">Api Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exposing-api-container">Exposing API container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api-service-setup">Api service setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rust.html">Rust development</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="user.html" title="previous chapter">User Service (Python)</a></li>
+      <li>Next: <a href="rust.html" title="next chapter">Rust development</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Marcus Edwards.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/modules/api.md.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

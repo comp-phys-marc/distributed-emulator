@@ -38,6 +38,7 @@ SET default_with_oids = false;
 CREATE TABLE public."Calculation" (
     id integer DEFAULT nextval('public.calculation_seq'::regclass) NOT NULL,
     user_id integer,
+    experiment_id integer,
     result text,
     type text
 );
@@ -67,6 +68,36 @@ CREATE TABLE public."SinglePhase" (
     states text,
     negative_flags text,
     imaginary_flags text
+);
+
+
+--
+-- Name: experiment_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.experiment_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: Experiment; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public."Experiment" (
+    id integer DEFAULT nextval('public.experiment_seq'::regclass) NOT NULL,
+    user_id integer,
+    name text,
+    type text,
+    code text,
+    circuit text,
+    qubits integer,
+    simulators integer,
+    emulators integer,
+    device_id text
 );
 
 
@@ -151,8 +182,10 @@ CREATE USER simulationservice;
 ALTER USER simulationservice with password 'tercesumisdeqmis';
 GRANT ALL ON TABLE "Calculation" to simulationservice;
 GRANT ALL ON TABLE "SinglePhase" to simulationservice;
+GRANT ALL ON TABLE "Experiment" to simulationservice;
 GRANT ALL ON SEQUENCE calculation_seq TO simulationservice;
 GRANT ALL ON SEQUENCE single_phase_seq TO simulationservice;
+GRANT ALL ON SEQUENCE experiment_seq TO simulationservice;
 
 
 CREATE USER analysisservice;
@@ -166,4 +199,3 @@ GRANT ALL ON SEQUENCE calculation_seq TO analysisservice;
 --
 -- PostgreSQL database dump complete
 --
-

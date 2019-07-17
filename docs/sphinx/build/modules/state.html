@@ -1,0 +1,175 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>State &#8212; QEDlib 0.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Parent Repository (Python)" href="dev.html" />
+    <link rel="prev" title="Ket" href="ket.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="state">
+<h1>State<a class="headerlink" href="#state" title="Permalink to this headline">¶</a></h1>
+<p><strong>State</strong> is a class that represents a full quantum state and maintains a set of underlying  basis  vectors  with  coefficients using the <em>Ket</em> class.
+To initialize a <em>state</em>, one must provide a <em>ket_list</em>,  <em>num_qubits</em>  and  <em>symbol</em>.  The <em>ket_list</em> should be a list of instances  of  the <em>Ket</em> class.
+<em>num_qubits</em> should be an Integer that specifies the size  of  quantum  register  required  for the  coming  experiment.   The <em>symbol</em> is  simply
+a <em>String</em> that  will  be  used to visually differentiate between states that  are  used  and  printed  out  within the same program.  An
+additional local data  structure requirements is  maintained within each <em>state</em> which can be used  to  record  information  about  the complexity,
+timing  and  hardware  dependencies of the state as seen during an experiment. The  local  data  for  a  <em>state</em>  object might be the following.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">kets</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">num_qubits</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">symbol</span> <span class="o">=</span> <span class="s2">&quot;q&quot;</span>
+<span class="n">requirements</span> <span class="o">=</span> <span class="p">{}</span>
+</pre></div>
+</div>
+<p><strong>state.add_ket (self, ket) → ()</strong> adds a <em>Ket</em> object to the list <em>state.kets</em>.</p>
+<p><strong>state.remove_ket (self, ket) → ()</strong> removes a <em>Ket</em> object from the list <em>state.kets</em>.</p>
+<p><strong>state.get_components (self, qubit) → ()</strong> determines the two components <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> of the state vector for the given target qubit. This is achieved by the following calculation, where <span class="math notranslate nohighlight">\(v_i\)</span> are the basis vectors, <span class="math notranslate nohighlight">\(c_i\)</span> is the <span class="math notranslate nohighlight">\(i^{th}\)</span> complex coefficient, and <span class="math notranslate nohighlight">\(v_{i_q}\)</span> is the value of the qubit <span class="math notranslate nohighlight">\(q\)</span> for basis vector <span class="math notranslate nohighlight">\(v_i\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{bmatrix}
+    \alpha \\
+    \beta \\
+\end{bmatrix} =
+\begin{bmatrix}
+    \sum_{v_i} v_{i_q} \times c_i \\
+    \sum_{v_i} v_{i_q} \times \bar{c_i} \\
+\end{bmatrix}\end{split}\]</div>
+<p><strong>state.get_density_matrix (self, qubit) → ()</strong> determines the four components of the density matrix for the given target qubit. This is achieved by the following calculation. <span class="math notranslate nohighlight">\(v_i\)</span> are the basis vectors. <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> are the components of the given qubit’s state vector determined using a call to <em>state.get_components</em>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\rho = \begin{bmatrix}
+    \alpha^2 &amp; \alpha \bar{\beta} \\
+    \beta \bar{\alpha} &amp; \beta^2 \\
+\end{bmatrix}\end{split}\]</div>
+<p><strong>state.x (self, qubit) → (self)</strong> performs a Pauli X gate on the target qubit by calling <span class="math notranslate nohighlight">\(ket.x \; \forall \; ket \in state.kets\)</span>. <em>state.x</em> prints the state in Dirac notation before and after the operation. The state is normalized, printed and changes to experiment requirements are registered after each use.</p>
+<p><strong>state.cx (self, source, target) → (self)</strong> performs a Controlled X gate on the target qubit with the source qubit as controller by calling <span class="math notranslate nohighlight">\(ket.cx \; \forall \; ket \in state.kets\)</span>. <em>state.cx</em> prints the state Dirac notation before and after the operation. The state is normalized, printed and changes to experiment requirements are registered after each use.</p>
+<p><strong>state.y (self, qubit) → (self)</strong> performs a Pauli Y gate on the target qubit by calling <span class="math notranslate nohighlight">\(ket.y \; \forall \; ket \in state.kets\)</span>. <em>state.y</em> prints the state in Dirac notation before and after the operation. The state is normalized, printed and changes to experiment requirements are registered after each use.</p>
+<p><strong>state.z (self, qubit) → (self)</strong> performs a Pauli Z gate on the target qubit by calling <span class="math notranslate nohighlight">\(ket.z \; \forall \; ket \in state.kets\)</span>. <em>state.z</em> prints the state in Dirac notation before and after the operation. The state is normalized, printed and changes to experiment requirements are registered after each use.</p>
+<p><strong>state.s (self, qubit) → (self)</strong> performs an S phase shift gate on the target qubit by calling <span class="math notranslate nohighlight">\(ket.s \; \forall \; ket \in state.kets\)</span>. <em>state.s</em> prints the state in Dirac notation before and after the operation. The state is normalized, printed and changes to experiment requirements are registered after each use.</p>
+<p><strong>state.sdg (self, qubit) → (self)</strong> performs an S <span class="math notranslate nohighlight">\(\dagger\)</span> phase shift gate on the target qubit by calling <span class="math notranslate nohighlight">\(ket.sdg \; \forall \; ket \in state.kets\)</span>. <em>state.sdg</em> prints the state in Dirac notation before and after the operation. The state is normalized, printed and changes to experiment requirements are registered after each use.</p>
+<p><strong>state.h (self, qubit) → (self)</strong> performs a Hadamard gate on the target qubit by calling <span class="math notranslate nohighlight">\(ket.h \; \forall \; ket \in state.kets\)</span>. <em>state.kets</em> is replaced by the list of all <em>Ket</em> objects returned from the calls to the <em>ket.h</em> methods. <em>state.h</em> prints the state in Dirac notation before and after the operation. The state is normalized, printed and changes to experiment requirements are registered after each use.</p>
+<p><strong>state.post_select (self, data) → (self)</strong> filters the state’s list <em>state.kets</em> for bitstrings that match a specific set of post selected outcomes given by <em>data</em>. <em>data</em> gives the post selection criteria as a key value mapping of qubit index and bit value. The method simply loops over each <span class="math notranslate nohighlight">\(ket \in state.kets\)</span> and removes the objects that do not satisfy each post selection criteria. The state is normalized, printed and changes to experiment requirements are registered after each use.</p>
+<p><strong>state.m (self, qubit) → (result)</strong> measures the target qubit in the computational basis. <em>state.m</em> calculates the state vector components of the given <em>qubit</em> using the same approach as <em>get_components</em>, then calls an overrideable helper function <em>state._measure</em> to obtain a probabilistic outcome based on <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>. <em>state.kets</em> becomes the set of objects in <em>state.kets</em> with basis vectors that agree with the measured value for the qubit in question. The state is normalized, printed and changes to experiment requirements are registered after each use.</p>
+<p><strong>state._measure (self, alpha_squared, beta_squared) → (result)</strong> uses pseudo-probability to simulate measuring a probabilistic qubit. This function might be overridden by an inheriting class to implement a more interesting measurement function.</p>
+<p><strong>state.normalize (self, alpha_squared, beta_squared) → (self)</strong> ensures that all basis vectors in <em>state.kets</em> are unique. In the case that basis vectors have been duplicated, the instances are combined by summing their complex coefficients and creating a new <em>Ket</em> object with the new coefficient. All original instances are removed. Once the basis vectors are unique, the state is normalized by multiplying each basis vector’s complex coefficient by a normalizing factor.</p>
+<div class="math notranslate nohighlight">
+\[|\psi_n&gt; = \frac{1}{\sqrt{\sum_{v_i} |v_i|^2 }} |\psi&gt;\]</div>
+<p><strong>state.register_requirements (self) → ()</strong> checks if the current state of the quantum system is the most expensive yet seen during the experiment’s runtime. If it is the most expensive state, updates the resource requirements. Requirements include but are not limited to:}</p>
+<ul class="simple">
+<li>bits</li>
+<li>floats</li>
+<li>flops</li>
+</ul>
+<p><strong>state.print_requirements (self) → ()</strong> prints the requirements for maintaining the current state of the quantum system.</p>
+<p><strong>state.print_max_requirements (self) → ()</strong> prints the requirements for maintaining the most expensive state of the quantum system seen during the experiment.</p>
+<p><strong>state.print (self) → ()</strong> prints the full quantum state by calling <span class="math notranslate nohighlight">\(ket.print \; \forall \; ket \in state.kets\)</span>.</p>
+<p><strong>state.print_state_vectors (self) → ()</strong> prints the state vector for each qubit using <em>state.get_components</em> to calculate <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
+<p><strong>state.print_density_matrices (self) → ()</strong> prints the density matrices for each qubit using <em>state.get_density_matrix</em>.</p>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">QEDlib</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ensemble.html">Ensemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entanglement.html">Entanglement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entangled_ket.html">EntangledKet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ket.html">Ket</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html">Parent Repository (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dep.html">Deploy Tools (Bash)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sim.html">Simulation Service (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user.html">User Service (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Api Service (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rust.html">Rust development</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="ket.html" title="previous chapter">Ket</a></li>
+      <li>Next: <a href="dev.html" title="next chapter">Parent Repository (Python)</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Marcus Edwards.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/modules/state.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

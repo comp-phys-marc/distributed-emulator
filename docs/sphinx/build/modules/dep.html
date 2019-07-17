@@ -1,0 +1,314 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Deploy Tools (Bash) &#8212; QEDlib 0.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Simulation Service (Python)" href="sim.html" />
+    <link rel="prev" title="Parent Repository (Python)" href="dev.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="deploy-tools-bash">
+<h1>Deploy Tools (Bash)<a class="headerlink" href="#deploy-tools-bash" title="Permalink to this headline">¶</a></h1>
+<p>Bash scripts which automate the deployment of the system’s microservices, performing most of the steps below.</p>
+<div class="section" id="deployment-tools-setup">
+<h2>Deployment tools setup<a class="headerlink" href="#deployment-tools-setup" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="install-gcloud">
+<h3>Install gcloud<a class="headerlink" href="#install-gcloud" title="Permalink to this headline">¶</a></h3>
+<p>Mac</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">dl</span><span class="o">.</span><span class="n">google</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">dl</span><span class="o">/</span><span class="n">cloudsdk</span><span class="o">/</span><span class="n">channels</span><span class="o">/</span><span class="n">rapid</span><span class="o">/</span><span class="n">downloads</span><span class="o">/</span><span class="n">google</span><span class="o">-</span><span class="n">cloud</span><span class="o">-</span><span class="n">sdk</span><span class="o">-</span><span class="mf">234.0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">darwin</span><span class="o">-</span><span class="n">x86_64</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+<span class="o">./</span><span class="n">google</span><span class="o">-</span><span class="n">cloud</span><span class="o">-</span><span class="n">sdk</span><span class="o">/</span><span class="n">install</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<p>Ubuntu</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create environment variable for correct distribution</span>
+<span class="n">export</span> <span class="n">CLOUD_SDK_REPO</span><span class="o">=</span><span class="s2">&quot;cloud-sdk-$(lsb_release -c -s)&quot;</span>
+
+<span class="c1"># Add the Cloud SDK distribution URI as a package source</span>
+<span class="n">echo</span> <span class="s2">&quot;deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main&quot;</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">-</span><span class="n">a</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">apt</span><span class="o">/</span><span class="n">sources</span><span class="o">.</span><span class="n">list</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">google</span><span class="o">-</span><span class="n">cloud</span><span class="o">-</span><span class="n">sdk</span><span class="o">.</span><span class="n">list</span>
+
+<span class="c1"># Import the Google Cloud Platform public key</span>
+<span class="n">curl</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">packages</span><span class="o">.</span><span class="n">cloud</span><span class="o">.</span><span class="n">google</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">apt</span><span class="o">/</span><span class="n">doc</span><span class="o">/</span><span class="n">apt</span><span class="o">-</span><span class="n">key</span><span class="o">.</span><span class="n">gpg</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">key</span> <span class="n">add</span> <span class="o">-</span>
+
+<span class="c1"># Update the package list and install the Cloud SDK</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span> <span class="o">&amp;&amp;</span> <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">google</span><span class="o">-</span><span class="n">cloud</span><span class="o">-</span><span class="n">sdk</span>
+
+<span class="n">gcloud</span> <span class="n">init</span>
+
+<span class="n">gcloud</span> <span class="n">config</span> <span class="nb">set</span> <span class="n">project</span> <span class="n">beaming</span><span class="o">-</span><span class="n">signal</span><span class="o">-</span><span class="mi">231717</span>
+<span class="n">gcloud</span> <span class="n">config</span> <span class="nb">set</span> <span class="n">compute</span><span class="o">/</span><span class="n">zone</span> <span class="n">us</span><span class="o">-</span><span class="n">central1</span><span class="o">-</span><span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-kubernetes">
+<h3>Install Kubernetes<a class="headerlink" href="#install-kubernetes" title="Permalink to this headline">¶</a></h3>
+<p>Mac</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">kubernetes</span><span class="o">-</span><span class="n">cli</span>
+</pre></div>
+</div>
+<p>Ubuntu</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">kubectl</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-docker">
+<h3>Install Docker:<a class="headerlink" href="#install-docker" title="Permalink to this headline">¶</a></h3>
+<p>Mac</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">docker</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">mac</span><span class="o">/</span><span class="n">beta</span><span class="o">/</span><span class="n">Docker</span><span class="o">.</span><span class="n">dmg</span>
+<span class="n">gcloud</span> <span class="n">auth</span> <span class="n">configure</span><span class="o">-</span><span class="n">docker</span>
+</pre></div>
+</div>
+<p>Ubuntu</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> \
+    <span class="n">apt</span><span class="o">-</span><span class="n">transport</span><span class="o">-</span><span class="n">https</span> \
+    <span class="n">ca</span><span class="o">-</span><span class="n">certificates</span> \
+    <span class="n">curl</span> \
+    <span class="n">software</span><span class="o">-</span><span class="n">properties</span><span class="o">-</span><span class="n">common</span>
+<span class="n">curl</span> <span class="o">-</span><span class="n">fsSL</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">docker</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">ubuntu</span><span class="o">/</span><span class="n">gpg</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">key</span> <span class="n">add</span> <span class="o">-</span>
+<span class="n">sudo</span> <span class="n">add</span><span class="o">-</span><span class="n">apt</span><span class="o">-</span><span class="n">repository</span> \
+   <span class="s2">&quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu </span><span class="se">\</span>
+<span class="s2">   $(lsb_release -cs) </span><span class="se">\</span>
+<span class="s2">   stable&quot;</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">docker</span><span class="o">-</span><span class="n">ce</span>
+
+<span class="n">gcloud</span> <span class="n">auth</span> <span class="n">configure</span><span class="o">-</span><span class="n">docker</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-docker-compose">
+<h3>Install docker compose<a class="headerlink" href="#install-docker-compose" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">curl</span> <span class="o">-</span><span class="n">L</span> <span class="s2">&quot;https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m)&quot;</span> <span class="o">-</span><span class="n">o</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span>
+<span class="n">sudo</span> <span class="n">chmod</span> <span class="o">+</span><span class="n">x</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="building-images">
+<h2>Building images<a class="headerlink" href="#building-images" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>export PROJECT_ID=&quot;$(gcloud config get-value project -q)&quot;
+
+cd ./apiservice
+docker build -t gcr.io/${PROJECT_ID}/apiservice:v1 .
+
+cd ../userservice
+docker build -t gcr.io/${PROJECT_ID}/userservice:v1 .
+
+cd ../simulationservice
+docker build -t gcr.io/${PROJECT_ID}/simulationservice:v1 .
+
+cd ../analysisservice
+docker build -t gcr.io/${PROJECT_ID}/analysisservice:v1 .
+
+docker push gcr.io/${PROJECT_ID}/simulationservice:v1
+docker push gcr.io/${PROJECT_ID}/userservice:v1
+docker push gcr.io/${PROJECT_ID}/apiservice:v1
+docker push gcr.io/${PROJECT_ID}/analysisservice:v1
+</pre></div>
+</div>
+</div>
+<div class="section" id="google-container-engine">
+<h2>Google Container Engine<a class="headerlink" href="#google-container-engine" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="deploying-an-image">
+<h3>Deploying an image<a class="headerlink" href="#deploying-an-image" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>gcloud compute instances create-with-container qedsimulation \
+     --container-image gcr.io/${PROJECT_ID}/simulationservice:v1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="updating-a-container">
+<h2>Updating a container<a class="headerlink" href="#updating-a-container" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>gcloud compute instances update-container qedsimulation \
+    --container-image gcr.io/${PROJECT_ID}/simulationservice:v2
+</pre></div>
+</div>
+</div>
+<div class="section" id="google-kubernetes">
+<h2>Google Kubernetes<a class="headerlink" href="#google-kubernetes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="creating-a-gke-cluster">
+<h3>Creating a GKE cluster<a class="headerlink" href="#creating-a-gke-cluster" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">container</span> <span class="n">clusters</span> <span class="n">create</span> <span class="n">qedemucluster</span> <span class="o">--</span><span class="n">num</span><span class="o">-</span><span class="n">nodes</span><span class="o">=</span><span class="mi">4</span>
+<span class="n">gcloud</span> <span class="n">container</span> <span class="n">clusters</span> <span class="n">get</span><span class="o">-</span><span class="n">credentials</span> <span class="n">qedemucluster</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>Deploying an image<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>kubectl run qedsimulation-deployment --image=gcr.io/${PROJECT_ID}/simulationservice:v1 --port 8080
+</pre></div>
+</div>
+</div>
+<div class="section" id="exposing-a-deployment">
+<h3>Exposing a deployment<a class="headerlink" href="#exposing-a-deployment" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kubectl</span> <span class="n">expose</span> <span class="n">deployment</span> <span class="n">qedsimulation</span><span class="o">-</span><span class="n">deployment</span> <span class="o">--</span><span class="n">port</span> <span class="mi">80</span> <span class="o">--</span><span class="n">target</span><span class="o">-</span><span class="n">port</span> <span class="mi">8080</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="scaling-a-deployment">
+<h3>Scaling a deployment<a class="headerlink" href="#scaling-a-deployment" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kubectl</span> <span class="n">scale</span> <span class="n">deployment</span> <span class="n">qedsimulation</span><span class="o">-</span><span class="n">deployment</span> <span class="o">--</span><span class="n">replicas</span><span class="o">=</span><span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="remote-access">
+<h2>Remote access<a class="headerlink" href="#remote-access" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="configure-rabbitmq-compute-engine-firewall">
+<h3>Configure RabbitMQ compute engine firewall<a class="headerlink" href="#configure-rabbitmq-compute-engine-firewall" title="Permalink to this headline">¶</a></h3>
+<p>Expose amqp port</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">compute</span> <span class="n">firewall</span><span class="o">-</span><span class="n">rules</span> <span class="n">create</span> <span class="n">rule</span><span class="o">-</span><span class="n">allow</span><span class="o">-</span><span class="n">tcp</span><span class="o">-</span><span class="mi">5672</span> <span class="o">--</span><span class="n">source</span><span class="o">-</span><span class="n">ranges</span> <span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">0</span> <span class="o">--</span><span class="n">target</span><span class="o">-</span><span class="n">tags</span> <span class="n">allow</span><span class="o">-</span><span class="n">tcp</span><span class="o">-</span><span class="mi">5672</span> <span class="o">--</span><span class="n">allow</span> <span class="n">tcp</span><span class="p">:</span><span class="mi">5672</span>
+<span class="n">gcloud</span> <span class="n">compute</span> <span class="n">instances</span> <span class="n">add</span><span class="o">-</span><span class="n">tags</span> <span class="n">qedrabbit</span> <span class="o">--</span><span class="n">zone</span> <span class="n">us</span><span class="o">-</span><span class="n">east1</span><span class="o">-</span><span class="n">b</span> <span class="o">--</span><span class="n">tags</span> <span class="n">allow</span><span class="o">-</span><span class="n">tcp</span><span class="o">-</span><span class="mi">5672</span>
+</pre></div>
+</div>
+<p>Expose management UI</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">compute</span> <span class="n">firewall</span><span class="o">-</span><span class="n">rules</span> <span class="n">create</span> <span class="n">rule</span><span class="o">-</span><span class="n">allow</span><span class="o">-</span><span class="n">tcp</span><span class="o">-</span><span class="mi">15672</span> <span class="o">--</span><span class="n">source</span><span class="o">-</span><span class="n">ranges</span> <span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">0</span> <span class="o">--</span><span class="n">target</span><span class="o">-</span><span class="n">tags</span> <span class="n">allow</span><span class="o">-</span><span class="n">tcp</span><span class="o">-</span><span class="mi">15672</span> <span class="o">--</span><span class="n">allow</span> <span class="n">tcp</span><span class="p">:</span><span class="mi">15672</span>
+<span class="n">gcloud</span> <span class="n">compute</span> <span class="n">instances</span> <span class="n">add</span><span class="o">-</span><span class="n">tags</span> <span class="n">qedrabbit</span> <span class="o">--</span><span class="n">zone</span> <span class="n">us</span><span class="o">-</span><span class="n">east1</span><span class="o">-</span><span class="n">b</span> <span class="o">--</span><span class="n">tags</span> <span class="n">allow</span><span class="o">-</span><span class="n">tcp</span><span class="o">-</span><span class="mi">15672</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="connecting-to-the-psql-database">
+<h3>Connecting to the PSQL database<a class="headerlink" href="#connecting-to-the-psql-database" title="Permalink to this headline">¶</a></h3>
+<p>You must connect from an authorized IP.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">psql</span> <span class="o">-</span><span class="n">h</span> <span class="mf">35.227</span><span class="o">.</span><span class="mf">110.153</span> <span class="o">-</span><span class="n">U</span> <span class="n">postgres</span> <span class="n">qedemudb</span>
+<span class="n">password</span><span class="p">:</span> <span class="n">tercesdeqmis</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="connecting-to-a-hosted-container">
+<h3>Connecting to a hosted container<a class="headerlink" href="#connecting-to-a-hosted-container" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">compute</span> <span class="o">--</span><span class="n">project</span> <span class="s2">&quot;beaming-signal-231717&quot;</span> <span class="n">ssh</span> <span class="o">--</span><span class="n">zone</span> <span class="s2">&quot;us-east1-b&quot;</span> <span class="s2">&quot;qedrabbit&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="building-images-locally">
+<h3>building images locally<a class="headerlink" href="#building-images-locally" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span> <span class="n">build</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="scaling-locally">
+<h3>Scaling locally<a class="headerlink" href="#scaling-locally" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span> <span class="n">scale</span> <span class="n">simulationservice</span><span class="o">=</span><span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">QEDlib</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ensemble.html">Ensemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entanglement.html">Entanglement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entangled_ket.html">EntangledKet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ket.html">Ket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html">Parent Repository (Python)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Deploy Tools (Bash)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#deployment-tools-setup">Deployment tools setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-images">Building images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#google-container-engine">Google Container Engine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#updating-a-container">Updating a container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#google-kubernetes">Google Kubernetes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#remote-access">Remote access</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sim.html">Simulation Service (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user.html">User Service (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Api Service (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rust.html">Rust development</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="dev.html" title="previous chapter">Parent Repository (Python)</a></li>
+      <li>Next: <a href="sim.html" title="next chapter">Simulation Service (Python)</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Marcus Edwards.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/modules/dep.md.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

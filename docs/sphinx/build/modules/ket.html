@@ -1,0 +1,147 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Ket &#8212; QEDlib 0.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="State" href="state.html" />
+    <link rel="prev" title="EntangledKet" href="entangled_ket.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="ket">
+<h1>Ket<a class="headerlink" href="#ket" title="Permalink to this headline">¶</a></h1>
+<p><strong>Ket</strong> is a class that maintains the information that corresponds with a single ket i.e. <span class="math notranslate nohighlight">\(| 000..0 &gt;\)</span> which would appear in the Dirac notation of a quantum state. A <em>ket</em> object understands how each unitary transformation affects its bitstring and complex coefficient.</p>
+<p>We use the string constants “0” and “1” to represent the computational basis states of the single qubit. These constants are declared in the <em>ket</em> package since it contains the lowest-level class which references the basis states. The local data for the <em>ket</em> package consists of these constants.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ZERO</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span>
+<span class="n">ONE</span> <span class="o">=</span> <span class="s2">&quot;1&quot;</span>
+</pre></div>
+</div>
+<p>A <em>ket</em> can optionally be initialized with a complex coefficient and a bitstring value. However, these can be left empty at object instantiation and set later using <em>ket.set_coefficient</em> and <em>ket.set_val</em>.</p>
+<p>In the spirit of object oriented programming, the <em>ket</em> class implements getters and setters. It also implements the supported unitary operators and a print function for readout.</p>
+<p>The data local to a <em>ket</em> object are its bitstring value and a reference to its complex coefficient, which is an object itself. i.e.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">val</span> <span class="o">=</span> <span class="s2">&quot;0000...0&quot;</span>
+<span class="n">coefficient</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">coefficient</span>
+</pre></div>
+</div>
+<p><strong>ket.get_val (self) → (self.val)</strong> is a method that allows for the retrieval of a <em>ket’s</em> bitstring as a <em>String</em>.</p>
+<p><strong>ket.get_coefficient (self) → (self.coefficient)</strong> allows for the retrieval of a <em>ket’s</em> complex coefficient, which will be either an instance of the <em>Coefficient</em> class, or <em>None</em>.</p>
+<p><strong>ket.set_val (self, val) → (self)</strong> sets a <em>ket’s</em> bitstring to a given <em>String val</em> if <span class="math notranslate nohighlight">\(val \in [ONE, ZERO]\)</span>.</p>
+<p><strong>ket.set_coefficient (self, coefficient) → (self)</strong> sets a <em>ket’s</em> complex coefficient to a given a valid instance of the <em>Coefficient</em> class.</p>
+<p><strong>ket.get_probability (self) → (probability)</strong> returns the probabilistic weight of the <em>ket’s</em> basis vector <span class="math notranslate nohighlight">\(v_i\)</span> within its overall quantum state, <span class="math notranslate nohighlight">\(|v_i|^2\)</span>. This method does not perform the calculation of this probability, but delegates that calculation to the public method of the <em>coefficient</em> itself <em>to_probability</em>.</p>
+<p><strong>ket.x (self, qubit) → (self)</strong> performs a Pauli X gate on the target qubit by simply flipping the appropriate bit in the bitstring <em>self.val</em>.</p>
+<p><strong>ket.cx (self, source, target) → (self)</strong> performs a Controlled-X gate on the target qubit with the source qubit as controller. This is done by simply flipping the appropriate target bit if the control is equal to <em>ONE</em>.</p>
+<p><strong>ket.y (self, qubit) → (self)</strong> performs a Pauli Y gate on the target qubit by simply calling the methods <em>self.x, self.z</em> and <em>self.coefficient.multiply_by_i</em>.</p>
+<p><strong>ket.z (self, qubit) → (self)</strong> performs a Pauli Z gate on the target qubit by calling the method <em>self.coefficient.negate_magnitude</em> if the appropriate bit in the bitstring <em>self.val</em> is equal to <em>ONE</em>.</p>
+<p><strong>ket.h (self, qubit) → (self, new_ket)</strong> performs a Hadamard gate on the target qubit by creating a new <em>ket</em> object with the a bitstring <em>ket.val</em> and coefficient <em>ket.coefficient</em> which are copies of <em>self.val</em> and <em>self.coefficient</em>. Then, if the appropriate bit in <em>self.val</em> is equal to <em>ONE</em>, calls <em>ket.coefficient.negate_magnitude</em> on the new <em>ket</em>.</p>
+<p><strong>ket.s (self, qubit) → (self)</strong> performs an S phase shift gate on the target qubit by calling the method <em>self.coefficient.multiply_by_i</em> if the appropriate bit in the bitstring <em>self.val</em> is equal to <em>ONE</em>.</p>
+<p><strong>ket.sdg (self, qubit) → (self)</strong> performs an S <span class="math notranslate nohighlight">\(\dagger\)</span> gate on the target qubit by calling both the methods <em>self.coefficient.multiply_by_i</em> and <em>self.coefficient.negate_magnitude</em> if the appropriate bit in the bitstring <em>self.val</em> is equal to <em>ONE</em>. <em>self.val</em>.</p>
+<p><strong>ket.print (self) → ()</strong> prints the <em>ket</em> by first calling <em>self.coefficient.print</em> and then printing <em>self.val</em> in Dirac notation.</p>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">QEDlib</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ensemble.html">Ensemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entanglement.html">Entanglement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entangled_ket.html">EntangledKet</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Ket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html">Parent Repository (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dep.html">Deploy Tools (Bash)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sim.html">Simulation Service (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user.html">User Service (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Api Service (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rust.html">Rust development</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="entangled_ket.html" title="previous chapter">EntangledKet</a></li>
+      <li>Next: <a href="state.html" title="next chapter">State</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Marcus Edwards.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/modules/ket.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
