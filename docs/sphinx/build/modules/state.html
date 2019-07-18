@@ -36,18 +36,26 @@
             
   <div class="section" id="state-python">
 <h1>State (Python)<a class="headerlink" href="#state-python" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class">
+<h2>Class<a class="headerlink" href="#class" title="Permalink to this headline">¶</a></h2>
 <p><strong>State</strong> is a class that represents a full quantum state and maintains a set of underlying  basis  vectors  with  coefficients using the <em>Ket</em> class.
 To initialize a <em>state</em>, one must provide a <em>ket_list</em>,  <em>num_qubits</em>  and  <em>symbol</em>.  The <em>ket_list</em> should be a list of instances  of  the <em>Ket</em> class.
 <em>num_qubits</em> should be an Integer that specifies the size  of  quantum  register  required  for the  coming  experiment.   The <em>symbol</em> is  simply
 a <em>String</em> that  will  be  used to visually differentiate between states that  are  used  and  printed  out  within the same program.  An
-additional local data  structure requirements is  maintained within each <em>state</em> which can be used  to  record  information  about  the complexity,
-timing  and  hardware  dependencies of the state as seen during an experiment. The  local  data  for  a  <em>state</em>  object might be the following.</p>
+additional local data  structure requirements is  maintained within each <em>state</em> which can be used  to  record  information  about  the complexity and
+timing of the state as seen during an experiment.</p>
+<div class="section" id="data">
+<h3>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h3>
+<p>The  local  data  for  a  <em>state</em>  object might be the following.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">kets</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">num_qubits</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="n">symbol</span> <span class="o">=</span> <span class="s2">&quot;q&quot;</span>
 <span class="n">requirements</span> <span class="o">=</span> <span class="p">{}</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h3>
 <p><strong>state.add_ket (self, ket) → ()</strong> adds a <em>Ket</em> object to the list <em>state.kets</em>.</p>
 <p><strong>state.remove_ket (self, ket) → ()</strong> removes a <em>Ket</em> object from the list <em>state.kets</em>.</p>
 <p><strong>state.get_components (self, qubit) → ()</strong> determines the two components <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> of the state vector for the given target qubit. This is achieved by the following calculation, where <span class="math notranslate nohighlight">\(v_i\)</span> are the basis vectors, <span class="math notranslate nohighlight">\(c_i\)</span> is the <span class="math notranslate nohighlight">\(i^{th}\)</span> complex coefficient, and <span class="math notranslate nohighlight">\(v_{i_q}\)</span> is the value of the qubit <span class="math notranslate nohighlight">\(q\)</span> for basis vector <span class="math notranslate nohighlight">\(v_i\)</span>.</p>
@@ -91,6 +99,8 @@ timing  and  hardware  dependencies of the state as seen during an experiment. T
 <p><strong>state.print_state_vectors (self) → ()</strong> prints the state vector for each qubit using <em>state.get_components</em> to calculate <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
 <p><strong>state.print_density_matrices (self) → ()</strong> prints the density matrices for each qubit using <em>state.get_density_matrix</em>.</p>
 </div>
+</div>
+</div>
 
 
           </div>
@@ -117,9 +127,14 @@ timing  and  hardware  dependencies of the state as seen during an experiment. T
 <li class="toctree-l1"><a class="reference internal" href="api.html">Api Service (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysis.html">Analysis Service (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rust.html">Rust Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parser.html">QASM Parser (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ket.html">Ket (Python)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">State (Python)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">State (Python)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#class">Class</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="ibmqx_state.html">IBMQXState (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_state.html">TensorState (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ensemble.html">Ensemble (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="entanglement.html">Entanglement (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="entangled_ket.html">EntangledKet (Python)</a></li>

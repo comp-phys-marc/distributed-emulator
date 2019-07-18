@@ -16,7 +16,7 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Ensemble (Python)" href="ensemble.html" />
+    <link rel="next" title="TensorState (Python)" href="tensor_state.html" />
     <link rel="prev" title="State (Python)" href="state.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -36,24 +36,36 @@
             
   <div class="section" id="ibmqxstate-python">
 <h1>IBMQXState (Python)<a class="headerlink" href="#ibmqxstate-python" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<p><strong>retry_if_backend_error (exception) → (success)</strong> implements exponential backoff by waiting 2^x * 100000 milliseconds between each retry.</p>
+</div>
+<div class="section" id="class">
+<h2>Class<a class="headerlink" href="#class" title="Permalink to this headline">¶</a></h2>
 <p><strong>IBMQXState</strong> is class that represents a quantum system being run on IBM’s quantum computer platform.
-To initialize a <em>ibmqx_state</em>, one must provide <em>num_qubits</em>  and  <em>symbol</em>. Optionally, a list of instances  of  the <em>Ket</em> class can be passed in as <em>ket_list</em> to represent
+To initialize a <em>ibmqx_state</em>, one provides <em>num_qubits</em>  and  <em>symbol</em>. Optionally, a list of instances  of  the <em>Ket</em> class can be passed in as <em>ket_list</em> to represent
 the initial system state. <em>num_qubits</em> should be an <em>Integer</em> that specifies the size  of  quantum  register  required  for the  coming  experiment.   The <em>symbol</em> is
 a <em>String</em> that  will  be  used to identify the quantum register that is provisioned with IBM Q during the execution of experiments using this <em>ibmqx_state</em>. An
 additional local data  structure requirements is  maintained within each <em>ibmqx_state</em> which can be used  to  record  information  about  the backend quantum processor,
-qubits and gates used by the state during an experiment. The  local  data  for  a  <em>ibmqx_state</em>  object might be the following. An instantiator can optionally provide a pre-initialized instance of the IBM Quantum Experience API wrapper provided by their python library <em>IBMQuantumExperience</em> and/or an <em>api_token</em> that corresponds to the current user’s IBM Q account.
+qubits and gates used by the state during an experiment.</p>
+<div class="section" id="data">
+<h3>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h3>
+<p>The  local  data  for  a  <em>ibmqx_state</em>  object might be the following. An instantiator can optionally provide a pre-initialized instance of the IBM Quantum Experience API wrapper provided by their python library <em>IBMQuantumExperience</em> and/or an <em>api_token</em> that corresponds to the current user’s IBM Q account.
 A final local variable <em>jobs</em> accumulates results from various circuits that are run using the <em>ibmqx_state</em>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">kets</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">num_qubits</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="n">symbol</span> <span class="o">=</span> <span class="s2">&quot;q&quot;</span>
 <span class="n">requirements</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">jobs</span><span class="o">=</span> <span class="p">[]</span>
-<span class="n">device</span> <span class="o">=</span> <span class="s1">&#39;ibmqx4&#39;</span>
+<span class="n">device</span> <span class="o">=</span> <span class="s1">&#39;ibmqx4&#39;</span>  <span class="c1"># or &#39;ibmqx2&#39;, &#39;ibmq_16_melbourne&#39;, &#39;ibm_qasm_simulator&#39;</span>
 <span class="n">api</span> <span class="o">=</span> <span class="bp">None</span>
 <span class="n">api_token</span> <span class="o">=</span> <span class="bp">None</span>
 <span class="n">qasm</span> <span class="o">=</span> <span class="s1">&#39;OPENQASM 2.0;</span><span class="se">\n</span><span class="s1">include &quot;qelib1.inc&quot;;</span><span class="se">\n</span><span class="s1">qreg q[5];</span><span class="se">\n</span><span class="s1">creg c[5];&#39;</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h3>
 <p><strong>ibmqx_state._test_api_auth_token (self) → (credential)</strong> authenticates with the IBM Quantum Experience Platform using the library <em>IBMQuantumExperience</em> if <em>self.api_token</em> is valid.</p>
 <p><strong>ibmqx_state._connect (self) → ()</strong> attempts to connect to the Quantum Experience Platform. Calls <em>ibmqx_state._test_api_auth_token</em> and then sets <em>self.api</em> to the authenticated api wrapper instance provided by <em>IBMQuantumExperience</em>.</p>
 <p><strong>ibmqx_state.x (self, qubit) → (self)</strong> prepares to perform a Pauli X gate on the target qubit by adding the QASM for the corresponding operation and qubit to <em>self.qasm</em>. <em>ibmqx_state.x</em> prints the qasm after the operation. Changes to experiment requirements are registered after each use.</p>
@@ -124,7 +136,7 @@ A final local variable <em>jobs</em> accumulates results from various circuits t
 <p><strong>ibmqx_state.tomography (self, qubit, phases, shots, continue_from) → (results)</strong> replicates the current state’s QASM circuit and performs measurements in each of the three orthogonal axes of the Bloch sphere to determine the qubit’s state. Performs the full tomography approach defined in section three of reference <a class="reference external" href="https://arxiv.org/abs/1805.07185">[1]</a>.
 <em>phases</em> gives the number of equally spaced relative phases to sample with respect to each of the three orthogonal axes. Each phase measurement circuit is run a number of times equal to <em>shots</em>.
 <em>continue_from</em> allows for long-running tomography experiemnts to be resumed. This parameter specifies where to continue the tomography algorithm from in the case that it has been split up over time.
-Calls <em>self._analyze_tomographic_results</em> to immediately reconstruct the state if the backend is IBM’s simulator “ibmq_qasm_simulator” and the data is therefore immediately available.</p>
+Calls <em>self._analyze_tomographic_results</em> to immediately reconstruct the state if the backend is IBM’s simulator “ibm_qasm_simulator” and the data is therefore immediately available.</p>
 <p>Three different <em>IBMQXState</em> instances are created per relative phase, one for each orthogonal axis. these are <span class="math notranslate nohighlight">\(ibmqx\_state_x\)</span>, <span class="math notranslate nohighlight">\(ibmqx\_state_y\)</span> and <span class="math notranslate nohighlight">\(ibmqx\_state_z\)</span>. The jth phase to sample at each axis is calculated by:</p>
 <div class="math notranslate nohighlight">
 \[phase_j = \frac{2 \pi j}{phases - 1}\]</div>
@@ -205,7 +217,32 @@ Then the appropriate transformation is applied to each state to rotate the corre
 <span class="n">measure</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
 </pre></div>
 </div>
-<p><strong>ibmqx_state._analyze_tomographic_results (self, qubit, phases, shots, continue_from) → (results)</strong></p>
+<p><strong>ibmqx_state._analyze_tomographic_results (qubit, exp_vector, results) → (bloch_vectors)</strong> reconstructs the Bloch vector of a single-qubit state from a set of tomographic results from the IBM Quantum Experience API.
+<em>exp_vector</em> is expected to be a list of the subscripts <span class="math notranslate nohighlight">\(j \; \forall \; phase_j\)</span> that would have been used by <em>self.tomography</em>. <em>results</em> is expected to be dictionary of circuits’
+probabilistic measurement result distributions provided from the IBM Quantum Experience API during tomography. The Bloch vector is reconstructed by first summing the probabilities of each
+bitstring result where the <em>qubit</em> in question has a value of 1 to get <span class="math notranslate nohighlight">\(p_{one}\)</span>. Next, we also sum the probabilities of each bitstring result where the <em>qubit</em> in question has a value
+of 0 to get <span class="math notranslate nohighlight">\(p_{zero}\)</span>. Probabilities <span class="math notranslate nohighlight">\(p_{one}\)</span> and <span class="math notranslate nohighlight">\(p_{zero}\)</span> are collected for each component of the Bloch vector <em>[X, Y, Z]</em> and for each entry in <em>exp_vector</em> using the appropriate
+circuit results for each <span class="math notranslate nohighlight">\(i \in \{0, 1, 2\}, j \in exp\_vector\)</span>. Each component of a Bloch vector is calculated by <span class="math notranslate nohighlight">\(p_{zero} - p_{one}\)</span>. This assumes that the <em>results</em> are left in the same order that their circuits were submitted, so that the correct index of a result can be calculated by
+<span class="math notranslate nohighlight">\(3j + i\)</span>.</p>
+<p>The result <em>bloch_vectors</em> gives the set of vectors that were “observed” during the tomography process.</p>
+<a class="reference external image-reference" href="javascript:void(0);"><img alt="../_images/tomo.png" class="align-center" src="../_images/tomo.png" style="width: 300px;" /></a>
+<p>In order to reconstruct the quantum state of the <em>qubit</em>, one can simply sum the observed Bloch vectors.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># sum all observed vectors</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">bloch_vectors</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">pre</span><span class="p">,</span> <span class="n">curr</span><span class="p">:</span> <span class="n">pre</span> <span class="o">+</span> <span class="n">curr</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">pre</span><span class="p">,</span> <span class="n">curr</span><span class="p">:</span> <span class="n">pre</span> <span class="o">+</span> <span class="n">curr</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">pre</span><span class="p">,</span> <span class="n">curr</span><span class="p">:</span> <span class="n">pre</span> <span class="o">+</span> <span class="n">curr</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference external image-reference" href="javascript:void(0);"><img alt="../_images/bloch_vector.png" class="align-center" src="../_images/bloch_vector.png" style="width: 300px;" /></a>
+<p><strong>ibmqx_state.post_analyze_tomographic_results (qubit, exp_vector, results) → (bloch_vectors)</strong> reconstructs the Bloch vector of a single-qubit state from a set of tomographic results from the IBM Quantum Jobs API.
+<em>exp_vector</em> is expected to be a list of the subscripts <span class="math notranslate nohighlight">\(j \; \forall \; phase_j\)</span> that would have been used by <em>self.tomography</em>. <em>results</em> is expected to be dictionary of circuits’
+tallied measurement outcome results provided from the Jobs API. The Bloch vector is reconstructed by first counting the number of occurrences of each
+bitstring result where the <em>qubit</em> in question has a value of 1 to get <span class="math notranslate nohighlight">\(n_{one}\)</span>. Next, we also counting the number of occurrences of each bitstring result where the <em>qubit</em> in question has a value
+of 0 to get <span class="math notranslate nohighlight">\(n_{zero}\)</span>. <span class="math notranslate nohighlight">\(n_{one}\)</span> and <span class="math notranslate nohighlight">\(n_{zero}\)</span> are collected for each component of the Bloch vector <em>[X, Y, Z]</em> and for each entry in <em>exp_vector</em> using the appropriate
+circuit results for each <span class="math notranslate nohighlight">\(i \in \{0, 1, 2\}, j \in exp\_vector\)</span>. Each component of a Bloch vector is calculated by <span class="math notranslate nohighlight">\(n_{zero}/(n_{zero}+n_{one}) - n_{one}/(n_{zero}+n_{one})\)</span>. This assumes that the <em>results</em>
+are left in the same order that their circuits were submitted, so that the correct index of a result can be calculated by <span class="math notranslate nohighlight">\(3j + i\)</span>. The result <em>bloch_vectors</em> gives the set of vectors that were “observed” during the tomography process. In order to reconstruct the quantum state of the <em>qubit</em>,
+one can simply sum the observed Bloch vectors.</p>
 <p><strong>ibmqx_state.register_requirements (self) → ()</strong> checks if the current state of the quantum system is the most expensive yet seen during the experiment’s runtime. If it is the most expensive state, updates the resource requirements. Requirements include but are not limited to:</p>
 <ul class="simple">
 <li>qubits</li>
@@ -268,10 +305,11 @@ Then the appropriate transformation is applied to each state to rotate the corre
 </div>
 <p><strong>ibmqx_state.print_max_requirements (self) → ()</strong> prints the requirements for maintaining the most expensive state of the quantum system seen during the experiment.</p>
 <p><strong>ibmqx_state.print (self) → ()</strong> prints <em>self.qasm</em>.</p>
-<div class="section" id="exception-handling">
-<h2>Exception Handling<a class="headerlink" href="#exception-handling" title="Permalink to this headline">¶</a></h2>
-<p><strong>backend_exception</strong> is an exception that is raised when an error is returned from a remote system.</p>
-<p><strong>retry_if_backend_error (exception) → (success)</strong> implements exponential backoff by waiting 2^x * 100000 milliseconds between each retry.</p>
+</div>
+<div class="section" id="exceptions">
+<h3>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h3>
+<p><strong>BackendException</strong> is an exception that is raised when an error is returned from a remote system.</p>
+</div>
 </div>
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
@@ -309,13 +347,16 @@ Then the appropriate transformation is applied to each state to rotate the corre
 <li class="toctree-l1"><a class="reference internal" href="api.html">Api Service (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysis.html">Analysis Service (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rust.html">Rust Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parser.html">QASM Parser (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ket.html">Ket (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="state.html">State (Python)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">IBMQXState (Python)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#exception-handling">Exception Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functions">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#class">Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_state.html">TensorState (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ensemble.html">Ensemble (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="entanglement.html">Entanglement (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="entangled_ket.html">EntangledKet (Python)</a></li>
@@ -326,7 +367,7 @@ Then the appropriate transformation is applied to each state to rotate the corre
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
       <li>Previous: <a href="state.html" title="previous chapter">State (Python)</a></li>
-      <li>Next: <a href="ensemble.html" title="next chapter">Ensemble (Python)</a></li>
+      <li>Next: <a href="tensor_state.html" title="next chapter">TensorState (Python)</a></li>
   </ul></li>
 </ul>
 </div>

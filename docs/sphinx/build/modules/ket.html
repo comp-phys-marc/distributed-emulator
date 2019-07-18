@@ -17,7 +17,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="State (Python)" href="state.html" />
-    <link rel="prev" title="Rust Development" href="rust.html" />
+    <link rel="prev" title="QASM Parser (Python)" href="parser.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -36,7 +36,11 @@
             
   <div class="section" id="ket-python">
 <h1>Ket (Python)<a class="headerlink" href="#ket-python" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class">
+<h2>Class<a class="headerlink" href="#class" title="Permalink to this headline">¶</a></h2>
 <p><strong>Ket</strong> is a class that maintains the information that corresponds with a single ket i.e. <span class="math notranslate nohighlight">\(| 000..0 &gt;\)</span> which would appear in the Dirac notation of a quantum state. A <em>ket</em> object understands how each unitary transformation affects its bitstring and complex coefficient.</p>
+<div class="section" id="data">
+<h3>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h3>
 <p>We use the string constants “0” and “1” to represent the computational basis states of the single qubit. These constants are declared in the <em>ket</em> package since it contains the lowest-level class which references the basis states. The local data for the <em>ket</em> package consists of these constants.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ZERO</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span>
 <span class="n">ONE</span> <span class="o">=</span> <span class="s2">&quot;1&quot;</span>
@@ -46,9 +50,12 @@
 <p>In the spirit of object oriented programming, the <em>ket</em> class implements getters and setters. It also implements the supported unitary operators and a print function for readout.</p>
 <p>The data local to a <em>ket</em> object are its bitstring value and a reference to its complex coefficient, which is an object itself. i.e.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">val</span> <span class="o">=</span> <span class="s2">&quot;0000...0&quot;</span>
-<span class="n">coefficient</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">coefficient</span>
+<span class="n">coefficient</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">Coefficient</span> <span class="n">instance</span><span class="o">&gt;</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h3>
 <p><strong>ket.get_val (self) → (self.val)</strong> is a method that allows for the retrieval of a <em>ket’s</em> bitstring as a <em>String</em>.</p>
 <p><strong>ket.get_coefficient (self) → (self.coefficient)</strong> allows for the retrieval of a <em>ket’s</em> complex coefficient, which will be either an instance of the <em>Coefficient</em> class, or <em>None</em>.</p>
 <p><strong>ket.set_val (self, val) → (self)</strong> sets a <em>ket’s</em> bitstring to a given <em>String val</em> if <span class="math notranslate nohighlight">\(val \in [ONE, ZERO]\)</span>.</p>
@@ -62,6 +69,8 @@
 <p><strong>ket.s (self, qubit) → (self)</strong> performs an S phase shift gate on the target qubit by calling the method <em>self.coefficient.multiply_by_i</em> if the appropriate bit in the bitstring <em>self.val</em> is equal to <em>ONE</em>.</p>
 <p><strong>ket.sdg (self, qubit) → (self)</strong> performs an S <span class="math notranslate nohighlight">\(\dagger\)</span> gate on the target qubit by calling both the methods <em>self.coefficient.multiply_by_i</em> and <em>self.coefficient.negate_magnitude</em> if the appropriate bit in the bitstring <em>self.val</em> is equal to <em>ONE</em>. <em>self.val</em>.</p>
 <p><strong>ket.print (self) → ()</strong> prints the <em>ket</em> by first calling <em>self.coefficient.print</em> and then printing <em>self.val</em> in Dirac notation.</p>
+</div>
+</div>
 </div>
 
 
@@ -89,9 +98,14 @@
 <li class="toctree-l1"><a class="reference internal" href="api.html">Api Service (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysis.html">Analysis Service (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rust.html">Rust Development</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Ket (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parser.html">QASM Parser (Python)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Ket (Python)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#class">Class</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="state.html">State (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ibmqx_state.html">IBMQXState (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_state.html">TensorState (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ensemble.html">Ensemble (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="entanglement.html">Entanglement (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="entangled_ket.html">EntangledKet (Python)</a></li>
@@ -101,7 +115,7 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="rust.html" title="previous chapter">Rust Development</a></li>
+      <li>Previous: <a href="parser.html" title="previous chapter">QASM Parser (Python)</a></li>
       <li>Next: <a href="state.html" title="next chapter">State (Python)</a></li>
   </ul></li>
 </ul>

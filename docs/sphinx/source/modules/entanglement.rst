@@ -2,18 +2,27 @@
 Entanglement (Python)
 =====================
 
+************
+Class
+************
+
 **Entanglement** is a class that encapsulates the information that is needed to determine how entanglement will affect a particular *Ket* object.
 
 An *Entanglement* object has initialization parameters *outcome, system, qubit*. The provided *outcome* is the measurement outcome for which a *ket* will **not** disappear. *qubit* is an entangled qubit index. The *system* is a system owning the qubit which is entangled.
+
+Data
+====
 
 The data local to an *Entanglement* object might be the following.
 
 .. code-block:: python
 
     self._outcome = 0
-    self._system = State
+    self._system = <State instance>
     self._qubit = 2
 
+Methods
+=======
 
 **entanglement.get\_outcome (self) → (self.\_outcome)** is a method that allows for the retrieval of the outcome.
 

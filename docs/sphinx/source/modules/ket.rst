@@ -2,7 +2,14 @@
 Ket (Python)
 ==============
 
+************
+Class
+************
+
 **Ket** is a class that maintains the information that corresponds with a single ket i.e. :math:`| 000..0 >` which would appear in the Dirac notation of a quantum state. A *ket* object understands how each unitary transformation affects its bitstring and complex coefficient.
+
+Data
+====
 
 We use the string constants "0" and "1" to represent the computational basis states of the single qubit. These constants are declared in the *ket* package since it contains the lowest-level class which references the basis states. The local data for the *ket* package consists of these constants.
 
@@ -20,7 +27,11 @@ The data local to a *ket* object are its bitstring value and a reference to its 
 .. code-block:: python
 
     val = "0000...0"
-    coefficient = &coefficient
+    coefficient = <Coefficient instance>
+
+
+Methods
+=======
 
 **ket.get\_val (self) → (self.val)** is a method that allows for the retrieval of a *ket's* bitstring as a *String*.
 

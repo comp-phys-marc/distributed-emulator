@@ -2,12 +2,27 @@
 IBMQXState (Python)
 ===================
 
+************
+Functions
+************
+
+**retry_if_backend_error (exception) → (success)** implements exponential backoff by waiting 2^x * 100000 milliseconds between each retry.
+
+************
+Class
+************
+
 **IBMQXState** is class that represents a quantum system being run on IBM's quantum computer platform.
-To initialize a *ibmqx_state*, one must provide *num_qubits*  and  *symbol*. Optionally, a list of instances  of  the *Ket* class can be passed in as *ket_list* to represent
+To initialize a *ibmqx_state*, one provides *num_qubits*  and  *symbol*. Optionally, a list of instances  of  the *Ket* class can be passed in as *ket_list* to represent
 the initial system state. *num_qubits* should be an *Integer* that specifies the size  of  quantum  register  required  for the  coming  experiment.   The *symbol* is
 a *String* that  will  be  used to identify the quantum register that is provisioned with IBM Q during the execution of experiments using this *ibmqx_state*. An
 additional local data  structure requirements is  maintained within each *ibmqx_state* which can be used  to  record  information  about  the backend quantum processor,
-qubits and gates used by the state during an experiment. The  local  data  for  a  *ibmqx_state*  object might be the following. An instantiator can optionally provide a pre-initialized instance of the IBM Quantum Experience API wrapper provided by their python library *IBMQuantumExperience* and/or an *api_token* that corresponds to the current user's IBM Q account.
+qubits and gates used by the state during an experiment.
+
+Data
+====
+
+The  local  data  for  a  *ibmqx_state*  object might be the following. An instantiator can optionally provide a pre-initialized instance of the IBM Quantum Experience API wrapper provided by their python library *IBMQuantumExperience* and/or an *api_token* that corresponds to the current user's IBM Q account.
 A final local variable *jobs* accumulates results from various circuits that are run using the *ibmqx_state*.
 
 .. code-block:: python
@@ -17,10 +32,14 @@ A final local variable *jobs* accumulates results from various circuits that are
    symbol = "q"
    requirements = {}
    jobs= []
-   device = 'ibmqx4'
+   device = 'ibmqx4'  # or 'ibmqx2', 'ibmq_16_melbourne', 'ibm_qasm_simulator'
    api = None
    api_token = None
    qasm = 'OPENQASM 2.0;\ninclude "qelib1.inc";\nqreg q[5];\ncreg c[5];'
+
+
+Methods
+=======
 
 **ibmqx_state._test_api_auth_token (self) → (credential)** authenticates with the IBM Quantum Experience Platform using the library *IBMQuantumExperience* if *self.api_token* is valid.
 
@@ -139,7 +158,7 @@ Example QASM
 **ibmqx_state.tomography (self, qubit, phases, shots, continue_from) → (results)** replicates the current state's QASM circuit and performs measurements in each of the three orthogonal axes of the Bloch sphere to determine the qubit's state. Performs the full tomography approach defined in section three of reference `[1] <https://arxiv.org/abs/1805.07185>`_.
 *phases* gives the number of equally spaced relative phases to sample with respect to each of the three orthogonal axes. Each phase measurement circuit is run a number of times equal to *shots*.
 *continue_from* allows for long-running tomography experiemnts to be resumed. This parameter specifies where to continue the tomography algorithm from in the case that it has been split up over time.
-Calls *self._analyze_tomographic_results* to immediately reconstruct the state if the backend is IBM's simulator "ibmq_qasm_simulator" and the data is therefore immediately available.
+Calls *self._analyze_tomographic_results* to immediately reconstruct the state if the backend is IBM's simulator "ibm_qasm_simulator" and the data is therefore immediately available.
 
 Three different *IBMQXState* instances are created per relative phase, one for each orthogonal axis. these are :math:`ibmqx\_state_x`, :math:`ibmqx\_state_y` and :math:`ibmqx\_state_z`. The jth phase to sample at each axis is calculated by:
 
@@ -219,7 +238,47 @@ Example QASM
     measure q[0] -> c[0];
 
 
-**ibmqx_state._analyze_tomographic_results (self, qubit, phases, shots, continue_from) → (results)**
+**ibmqx_state._analyze_tomographic_results (qubit, exp_vector, results) → (bloch_vectors)** reconstructs the Bloch vector of a single-qubit state from a set of tomographic results from the IBM Quantum Experience API.
+*exp_vector* is expected to be a list of the subscripts :math:`j \; \forall \; phase_j` that would have been used by *self.tomography*. *results* is expected to be dictionary of circuits'
+probabilistic measurement result distributions provided from the IBM Quantum Experience API during tomography. The Bloch vector is reconstructed by first summing the probabilities of each
+bitstring result where the *qubit* in question has a value of 1 to get :math:`p_{one}`. Next, we also sum the probabilities of each bitstring result where the *qubit* in question has a value
+of 0 to get :math:`p_{zero}`. Probabilities :math:`p_{one}` and :math:`p_{zero}` are collected for each component of the Bloch vector *[X, Y, Z]* and for each entry in *exp_vector* using the appropriate
+circuit results for each :math:`i \in \{0, 1, 2\}, j \in exp\_vector`. Each component of a Bloch vector is calculated by :math:`p_{zero} - p_{one}`. This assumes that the *results* are left in the same order that their circuits were submitted, so that the correct index of a result can be calculated by
+:math:`3j + i`.
+
+The result *bloch_vectors* gives the set of vectors that were "observed" during the tomography process.
+
+.. image:: ../_static/tomo.png
+    :align: center
+    :width: 300px
+    :target: javascript:void(0);
+
+In order to reconstruct the quantum state of the *qubit*, one can simply sum the observed Bloch vectors.
+
+.. code-block:: python
+
+    # sum all observed vectors
+    x, y, z = zip(*bloch_vectors)
+    x = functools.reduce(lambda pre, curr: pre + curr, x)
+    y = functools.reduce(lambda pre, curr: pre + curr, y)
+    z = functools.reduce(lambda pre, curr: pre + curr, z)
+
+
+.. image:: ../_static/bloch_vector.png
+    :align: center
+    :width: 300px
+    :target: javascript:void(0);
+
+
+**ibmqx_state.post_analyze_tomographic_results (qubit, exp_vector, results) → (bloch_vectors)** reconstructs the Bloch vector of a single-qubit state from a set of tomographic results from the IBM Quantum Jobs API.
+*exp_vector* is expected to be a list of the subscripts :math:`j \; \forall \; phase_j` that would have been used by *self.tomography*. *results* is expected to be dictionary of circuits'
+tallied measurement outcome results provided from the Jobs API. The Bloch vector is reconstructed by first counting the number of occurrences of each
+bitstring result where the *qubit* in question has a value of 1 to get :math:`n_{one}`. Next, we also counting the number of occurrences of each bitstring result where the *qubit* in question has a value
+of 0 to get :math:`n_{zero}`. :math:`n_{one}` and :math:`n_{zero}` are collected for each component of the Bloch vector *[X, Y, Z]* and for each entry in *exp_vector* using the appropriate
+circuit results for each :math:`i \in \{0, 1, 2\}, j \in exp\_vector`. Each component of a Bloch vector is calculated by :math:`n_{zero}/(n_{zero}+n_{one}) - n_{one}/(n_{zero}+n_{one})`. This assumes that the *results*
+are left in the same order that their circuits were submitted, so that the correct index of a result can be calculated by :math:`3j + i`. The result *bloch_vectors* gives the set of vectors that were "observed" during the tomography process. In order to reconstruct the quantum state of the *qubit*,
+one can simply sum the observed Bloch vectors.
+
 
 **ibmqx_state.register\_requirements (self) → ()** checks if the current state of the quantum system is the most expensive yet seen during the experiment's runtime. If it is the most expensive state, updates the resource requirements. Requirements include but are not limited to:
 
@@ -291,13 +350,11 @@ Example QASM
 
 **ibmqx_state.print (self) → ()** prints *self.qasm*.
 
-*******************
-Exception Handling
-*******************
 
-**backend_exception** is an exception that is raised when an error is returned from a remote system.
+Exceptions
+===================
 
-**retry_if_backend_error (exception) → (success)** implements exponential backoff by waiting 2^x * 100000 milliseconds between each retry.
+**BackendException** is an exception that is raised when an error is returned from a remote system.
 
 
 ***********

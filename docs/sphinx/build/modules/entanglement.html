@@ -36,17 +36,26 @@
             
   <div class="section" id="entanglement-python">
 <h1>Entanglement (Python)<a class="headerlink" href="#entanglement-python" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class">
+<h2>Class<a class="headerlink" href="#class" title="Permalink to this headline">¶</a></h2>
 <p><strong>Entanglement</strong> is a class that encapsulates the information that is needed to determine how entanglement will affect a particular <em>Ket</em> object.</p>
 <p>An <em>Entanglement</em> object has initialization parameters <em>outcome, system, qubit</em>. The provided <em>outcome</em> is the measurement outcome for which a <em>ket</em> will <strong>not</strong> disappear. <em>qubit</em> is an entangled qubit index. The <em>system</em> is a system owning the qubit which is entangled.</p>
+<div class="section" id="data">
+<h3>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h3>
 <p>The data local to an <em>Entanglement</em> object might be the following.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">_outcome</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="bp">self</span><span class="o">.</span><span class="n">_system</span> <span class="o">=</span> <span class="n">State</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">_system</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">State</span> <span class="n">instance</span><span class="o">&gt;</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">_qubit</span> <span class="o">=</span> <span class="mi">2</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h3>
 <p><strong>entanglement.get_outcome (self) → (self._outcome)</strong> is a method that allows for the retrieval of the outcome.</p>
 <p><strong>entanglement.get_system (self) → (self._system)</strong> is a method that allows for the retrieval of the system.</p>
 <p><strong>entanglement.get_qubit (self) → (self._qubit)</strong> is a method that allows for the retrieval of the qubit.</p>
+</div>
+</div>
 </div>
 
 
@@ -74,11 +83,16 @@
 <li class="toctree-l1"><a class="reference internal" href="api.html">Api Service (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysis.html">Analysis Service (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rust.html">Rust Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parser.html">QASM Parser (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ket.html">Ket (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="state.html">State (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ibmqx_state.html">IBMQXState (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_state.html">TensorState (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ensemble.html">Ensemble (Python)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Entanglement (Python)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Entanglement (Python)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#class">Class</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="entangled_ket.html">EntangledKet (Python)</a></li>
 </ul>
 

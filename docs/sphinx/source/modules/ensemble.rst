@@ -2,9 +2,14 @@
 Ensemble (Python)
 =================
 
+************
+Class
+************
+
 **Ensemble** is a class that maintains a set of quantum systems and supports interactions between them.
 
-
+Methods
+=======
 
 **ensemble.add\_subsystem (self, subsystem) → ()** adds a subsystem (i.e. *State* object) to the list *self.subsystems*.
 

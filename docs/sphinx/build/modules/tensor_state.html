@@ -1,0 +1,212 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>TensorState (Python) &#8212; Quantum Experiment Engine 0.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Ensemble (Python)" href="ensemble.html" />
+    <link rel="prev" title="IBMQXState (Python)" href="ibmqx_state.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="tensorstate-python">
+<h1>TensorState (Python)<a class="headerlink" href="#tensorstate-python" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class">
+<h2>Class<a class="headerlink" href="#class" title="Permalink to this headline">¶</a></h2>
+<p><strong>TensorState</strong> is a class that represents a full quantum state  in the tensor representation using Google’s TensorFlow.
+To initialize a <em>tensor_state</em>, one provides <em>num_qubits</em>  and  <em>symbol</em>. Optionally, a list of instances  of  the <em>Ket</em> class can be passed in as <em>ket_list</em> to represent
+the initial system state. <em>num_qubits</em> should be an <em>Integer</em> that specifies the size  of  quantum  register  required  for the  coming  experiment. The <em>symbol</em> is  simply
+a <em>String</em> that  will  be  used to visually differentiate between states that  are  used  and  printed  out  within the same program.  An
+additional local data  structure requirements is  maintained within each <em>tensor_state</em> which can be used  to  record  information  about  the complexity and timing  dependencies
+of the state as seen during an experiment.</p>
+<div class="section" id="data">
+<h3>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h3>
+<p>The  local  data  for  a  <em>tensor_state</em>  object might be the following.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">TFVariable</span> <span class="n">instance</span><span class="o">&gt;</span>
+<span class="n">num_qubits</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">symbol</span> <span class="o">=</span> <span class="s2">&quot;t&quot;</span>
+<span class="n">requirements</span> <span class="o">=</span> <span class="p">{}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h3>
+<p><strong>tensor_state.x (self, qubit) → (self)</strong> performs a Pauli X gate on the target qubit by applying the appropriate operator to the current state. <em>state.x</em> prints the state before and after the operation. Changes to experiment requirements are registered after each use.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}X = \begin{bmatrix}
+    0 &amp; 1 \\
+    1 &amp; 0 \\
+\end{bmatrix}\end{split}\]</div>
+<p><strong>tensor_state.cx (self, source, target) → (self)</strong> performs a Controlled X gate on the target qubit with the source qubit as controller by applying the appropriate operator to the current state. <em>state.x</em> prints the state before and after the operation. Changes to experiment requirements are registered after each use.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}CX = \begin{bmatrix}
+    1 &amp; 0 &amp; 0 &amp; 0 \\
+    0 &amp; 1 &amp; 0 &amp; 0 \\
+    0 &amp; 0 &amp; 0 &amp; 1 \\
+    0 &amp; 0 &amp; 1 &amp; 0 \\
+\end{bmatrix}\end{split}\]</div>
+<p><strong>tensor_state.y (self, qubit) → (self)</strong> performs a Pauli Y gate on the target qubit by applying the appropriate operator to the current state. <em>state.y</em> prints the state before and after the operation. Changes to experiment requirements are registered after each use.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}Y = \begin{bmatrix}
+    0 &amp; -i \\
+    i &amp; 0 \\
+\end{bmatrix}\end{split}\]</div>
+<p><strong>tensor_state.z (self, qubit) → (self)</strong> performs a Pauli Z gate on the target qubit by applying the appropriate operator to the current state. <em>state.z</em> prints the state before and after the operation. Changes to experiment requirements are registered after each use.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}Z = \begin{bmatrix}
+    1 &amp; 0 \\
+    0 &amp; -1 \\
+\end{bmatrix}\end{split}\]</div>
+<p><strong>tensor_state.s (self, qubit) → (self)</strong> performs an S gate on the target qubit by applying the appropriate operator to the current state. <em>state.s</em> prints the state before and after the operation. Changes to experiment requirements are registered after each use.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}S = \begin{bmatrix}
+    1 &amp; 1 \\
+    0 &amp; i \\
+\end{bmatrix}\end{split}\]</div>
+<p><strong>tensor_state.sdg (self, qubit) → (self)</strong> performs an S:math:<cite>dagger</cite> gate on the target qubit by applying the appropriate operator to the current state. <em>state.sdg</em> prints the state before and after the operation. Changes to experiment requirements are registered after each use.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}S^{\dagger} = \begin{bmatrix}
+    1 &amp; 1 \\
+    0 &amp; -i \\
+\end{bmatrix}\end{split}\]</div>
+<p><strong>tensor_state.h (self, qubit) → (self)</strong> performs a Hadamard gate on the target qubit by applying the appropriate operator to the current state. <em>state.h</em> prints the state before and after the operation. Changes to experiment requirements are registered after each use.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}H = \frac{1}{\sqrt{2}} \begin{bmatrix}
+    1 &amp; 1 \\
+    1 &amp; -1 \\
+\end{bmatrix}\end{split}\]</div>
+<p><strong>tensor_state.m (self, qubit) → (result)</strong> measures the target qubit in the computational basis. The <em>qubit</em> state needs to be extracted from the overall state tensor <em>self.state</em> which has a potentially high dimension. So, the measurement is performed in a few steps.</p>
+<ul class="simple">
+<li>A iso matrix is used to isolate the amplitudes of the target qubit, nulling the rest of the state.</li>
+<li>The locations of non-zero surviving terms are collected.</li>
+<li>The locations are checked to see if the target is in a pure observable state.</li>
+<li>If the target is not a pure observable, measurement is simulated using pseudo-probability.</li>
+</ul>
+<p><strong>tensor_state._measure (self, alpha) → (result)</strong> uses pseudo-random number generation to simulate the probabilistic outcome of a
+qubit measurement. The quantum system is updated with the measurement results. <em>alpha</em> is expected to be the first component in teh state vector of the qubit
+being measured.</p>
+<p><strong>tensor_state.register_requirements (self) → ()</strong> checks if the current state of the quantum system is the most expensive yet seen during the experiment’s runtime. If it is the most expensive state, updates the resource requirements. Requirements include but are not limited to:</p>
+<ul class="simple">
+<li>floats</li>
+<li>flops</li>
+</ul>
+<p><strong>tensor_state.print_requirements (self) → ()</strong> prints the requirements for maintaining the current state of the quantum system.</p>
+<p><strong>tensor_state.print_max_requirements (self) → ()</strong> prints the requirements for maintaining the most expensive state of the quantum system seen during the experiment.</p>
+<p><strong>tensor_state.print (self) → ()</strong> prints the full quantum state <em>self.state</em> as well as the shape and trace of the state.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Quantum Experiment Engine</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="dev.html">General Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dep.html">Deploy Tools (Bash)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sim.html">Simulation Service (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user.html">User Service (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Api Service (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis.html">Analysis Service (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rust.html">Rust Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parser.html">QASM Parser (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ket.html">Ket (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ibmqx_state.html">IBMQXState (Python)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">TensorState (Python)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#class">Class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ensemble.html">Ensemble (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entanglement.html">Entanglement (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entangled_ket.html">EntangledKet (Python)</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="ibmqx_state.html" title="previous chapter">IBMQXState (Python)</a></li>
+      <li>Next: <a href="ensemble.html" title="next chapter">Ensemble (Python)</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Marcus Edwards.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/modules/tensor_state.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

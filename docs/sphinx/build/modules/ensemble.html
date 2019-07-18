@@ -17,7 +17,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Entanglement (Python)" href="entanglement.html" />
-    <link rel="prev" title="IBMQXState (Python)" href="ibmqx_state.html" />
+    <link rel="prev" title="TensorState (Python)" href="tensor_state.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -36,13 +36,19 @@
             
   <div class="section" id="ensemble-python">
 <h1>Ensemble (Python)<a class="headerlink" href="#ensemble-python" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class">
+<h2>Class<a class="headerlink" href="#class" title="Permalink to this headline">¶</a></h2>
 <p><strong>Ensemble</strong> is a class that maintains a set of quantum systems and supports interactions between them.</p>
+<div class="section" id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h3>
 <p><strong>ensemble.add_subsystem (self, subsystem) → ()</strong> adds a subsystem (i.e. <em>State</em> object) to the list <em>self.subsystems</em>.</p>
 <p><strong>ensemble.m (self, system, qubit) → (result)</strong> measures a qubit and collapses quantum state across interacting subsystems accordingly. Calls <em>entangled_ket.should_collapse</em> <span class="math notranslate nohighlight">\(\; \forall \; ket \in subsystem.kets \; \forall \; subsystem \in self.subsystems.kets\)</span> to determine what kets should be collapsed.</p>
 <p><strong>ensemble.cx (self, source_system, source_qubit, target_system, target_qubit) → (target_system)</strong> performs a Controlled X gate between subsystems. Simply delegates the call if <em>source_system = target_system</em>. Otherwise, each the information of each <span class="math notranslate nohighlight">\(ket \in target\_subsystem.kets\)</span> is copied to a new <em>EntangledKet</em> object <em>new_ket</em>. <em>new_ket.x</em> is called and provided <em>target_qubit</em>. Then, <em>new_ket.entangle</em> is provided <span class="math notranslate nohighlight">\(outcome=0, system=source\_system, qubit=source\_qubit\)</span> and used to track the effects of entanglement on <em>new_ket</em>. <em>ket</em> is replaced with a new <em>entangled_ket</em> if it was not an instance of the <em>EntangledKet</em> class. <em>ket.entangle</em> is called and provided <span class="math notranslate nohighlight">\(outcome=1, system=source\_system, qubit=source\_qubit\)</span>. The subsystem is printed at the beginning and end of the method.</p>
 <p><strong>ensemble.execute (self) → ()</strong> calls the <em>subsystem.execute</em> method on each <span class="math notranslate nohighlight">\(subsystem \in self.subsystems\)</span> if it is defined.</p>
 <p><strong>ensemble.print_max_requirements (self) → ()</strong> prints the requirements for the most expensive states and operations encountered in the ensemble during an experiment.</p>
 <p><strong>ensemble.print_density_matrices (self) → ()</strong> prints the density matrix representations of each qubit in each subsystem.</p>
+</div>
+</div>
 </div>
 
 
@@ -70,10 +76,15 @@
 <li class="toctree-l1"><a class="reference internal" href="api.html">Api Service (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysis.html">Analysis Service (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rust.html">Rust Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parser.html">QASM Parser (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ket.html">Ket (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="state.html">State (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ibmqx_state.html">IBMQXState (Python)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Ensemble (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_state.html">TensorState (Python)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Ensemble (Python)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#class">Class</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="entanglement.html">Entanglement (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="entangled_ket.html">EntangledKet (Python)</a></li>
 </ul>
@@ -82,7 +93,7 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="ibmqx_state.html" title="previous chapter">IBMQXState (Python)</a></li>
+      <li>Previous: <a href="tensor_state.html" title="previous chapter">TensorState (Python)</a></li>
       <li>Next: <a href="entanglement.html" title="next chapter">Entanglement (Python)</a></li>
   </ul></li>
 </ul>

@@ -2,9 +2,15 @@
 EntangledKet (Python)
 =====================
 
+************
+Class
+************
+
 **EntangledKet** is a class that extends the *Ket* class. An *EntangledKet* object *entangled\_ket* has a list *entangled\_ket.\_entanglements* of *Entanglement* objects.
 
 
+Methods
+=======
 
 **entangled\_ket.entangle (self, outcome, system, qubit) → ()** adds an *EntangledKet* object to the list *self.\_entanglements* with the given initialization parameters.
 

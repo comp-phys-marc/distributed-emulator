@@ -2,12 +2,21 @@
 State (Python)
 ==============
 
+************
+Class
+************
+
 **State** is a class that represents a full quantum state and maintains a set of underlying  basis  vectors  with  coefficients using the *Ket* class.
 To initialize a *state*, one must provide a *ket_list*,  *num_qubits*  and  *symbol*.  The *ket_list* should be a list of instances  of  the *Ket* class.
 *num_qubits* should be an Integer that specifies the size  of  quantum  register  required  for the  coming  experiment.   The *symbol* is  simply
 a *String* that  will  be  used to visually differentiate between states that  are  used  and  printed  out  within the same program.  An
-additional local data  structure requirements is  maintained within each *state* which can be used  to  record  information  about  the complexity,
-timing  and  hardware  dependencies of the state as seen during an experiment. The  local  data  for  a  *state*  object might be the following.
+additional local data  structure requirements is  maintained within each *state* which can be used  to  record  information  about  the complexity and
+timing of the state as seen during an experiment.
+
+Data
+====
+
+The  local  data  for  a  *state*  object might be the following.
 
 .. code-block:: python
 
@@ -15,6 +24,11 @@ timing  and  hardware  dependencies of the state as seen during an experiment. T
    num_qubits = 5
    symbol = "q"
    requirements = {}
+
+
+Methods
+=======
+
 
 **state.add_ket (self, ket) → ()** adds a *Ket* object to the list *state.kets*.
 

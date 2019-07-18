@@ -35,12 +35,18 @@
             
   <div class="section" id="entangledket-python">
 <h1>EntangledKet (Python)<a class="headerlink" href="#entangledket-python" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class">
+<h2>Class<a class="headerlink" href="#class" title="Permalink to this headline">¶</a></h2>
 <p><strong>EntangledKet</strong> is a class that extends the <em>Ket</em> class. An <em>EntangledKet</em> object <em>entangled_ket</em> has a list <em>entangled_ket._entanglements</em> of <em>Entanglement</em> objects.</p>
+<div class="section" id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h3>
 <p><strong>entangled_ket.entangle (self, outcome, system, qubit) → ()</strong> adds an <em>EntangledKet</em> object to the list <em>self._entanglements</em> with the given initialization parameters.</p>
 <p><strong>entangled_ket.is_entangled_with (self, system, qubit) → (is_entangled)</strong> determines whether the existence of a <em>ket</em> is predicated upon entanglement effects related to the given qubit by checking each element of <em>self._entanglements</em>.</p>
 <p><strong>entangled_ket.should_collapse (self, outcome, system, qubit) → (should_collapse)</strong> determines whether the <em>ket</em> should collapse and disappear following a measurement of the given <em>qubit</em> yielding the given <em>outcome</em>.</p>
 <p><strong>entangled_ket.copy_entanglement_to (self, other_ket) → ()</strong> creates and adds a <em>Entanglement</em> instance to other_ket._entanglements by calling <em>other_ket.entangle</em> $; forall entanglement in self._entanglements$.</p>
 <p><strong>entangled_ket.h (self, qubit) → (self)</strong> performs a Hadamard gate on the target qubit and propagates entanglements to newly created <em>Ket</em> objects.</p>
+</div>
+</div>
 </div>
 
 
@@ -68,12 +74,17 @@
 <li class="toctree-l1"><a class="reference internal" href="api.html">Api Service (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysis.html">Analysis Service (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rust.html">Rust Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parser.html">QASM Parser (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ket.html">Ket (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="state.html">State (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ibmqx_state.html">IBMQXState (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_state.html">TensorState (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ensemble.html">Ensemble (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="entanglement.html">Entanglement (Python)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">EntangledKet (Python)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">EntangledKet (Python)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#class">Class</a></li>
+</ul>
+</li>
 </ul>
 
 <div class="relations">
