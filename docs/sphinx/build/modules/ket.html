@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Ket &#8212; QEDlib 0.1.0 documentation</title>
+    <title>Ket (Python) &#8212; Quantum Experiment Engine 0.1.0 documentation</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -16,8 +16,8 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="State" href="state.html" />
-    <link rel="prev" title="EntangledKet" href="entangled_ket.html" />
+    <link rel="next" title="State (Python)" href="state.html" />
+    <link rel="prev" title="Rust Development" href="rust.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -34,8 +34,8 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="ket">
-<h1>Ket<a class="headerlink" href="#ket" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="ket-python">
+<h1>Ket (Python)<a class="headerlink" href="#ket-python" title="Permalink to this headline">¶</a></h1>
 <p><strong>Ket</strong> is a class that maintains the information that corresponds with a single ket i.e. <span class="math notranslate nohighlight">\(| 000..0 &gt;\)</span> which would appear in the Dirac notation of a quantum state. A <em>ket</em> object understands how each unitary transformation affects its bitstring and complex coefficient.</p>
 <p>We use the string constants “0” and “1” to represent the computational basis states of the single qubit. These constants are declared in the <em>ket</em> package since it contains the lowest-level class which references the basis states. The local data for the <em>ket</em> package consists of these constants.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ZERO</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span>
@@ -71,7 +71,7 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../index.html">QEDlib</a></h1>
+<h1 class="logo"><a href="../index.html">Quantum Experiment Engine</a></h1>
 
 
 
@@ -82,25 +82,26 @@
 
 <h3>Navigation</h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="ensemble.html">Ensemble</a></li>
-<li class="toctree-l1"><a class="reference internal" href="entanglement.html">Entanglement</a></li>
-<li class="toctree-l1"><a class="reference internal" href="entangled_ket.html">EntangledKet</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Ket</a></li>
-<li class="toctree-l1"><a class="reference internal" href="state.html">State</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dev.html">Parent Repository (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html">General Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dep.html">Deploy Tools (Bash)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sim.html">Simulation Service (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user.html">User Service (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">Api Service (Python)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rust.html">Rust development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rust.html">Rust Development</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Ket (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ibmqx_state.html">IBMQXState (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ensemble.html">Ensemble (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entanglement.html">Entanglement (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entangled_ket.html">EntangledKet (Python)</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="entangled_ket.html" title="previous chapter">EntangledKet</a></li>
-      <li>Next: <a href="state.html" title="next chapter">State</a></li>
+      <li>Previous: <a href="rust.html" title="previous chapter">Rust Development</a></li>
+      <li>Next: <a href="state.html" title="next chapter">State (Python)</a></li>
   </ul></li>
 </ul>
 </div>

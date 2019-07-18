@@ -1,5 +1,5 @@
 ==============
-State
+State (Python)
 ==============
 
 **State** is a class that represents a full quantum state and maintains a set of underlying  basis  vectors  with  coefficients using the *Ket* class.

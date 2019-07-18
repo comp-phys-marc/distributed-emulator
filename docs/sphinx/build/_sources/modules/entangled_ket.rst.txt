@@ -1,6 +1,6 @@
-==============
-EntangledKet
-==============
+=====================
+EntangledKet (Python)
+=====================
 
 **EntangledKet** is a class that extends the *Ket* class. An *EntangledKet* object *entangled\_ket* has a list *entangled\_ket.\_entanglements* of *Entanglement* objects.
 

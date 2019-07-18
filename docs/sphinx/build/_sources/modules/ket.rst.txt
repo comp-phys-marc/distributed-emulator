@@ -1,5 +1,5 @@
 ==============
-Ket
+Ket (Python)
 ==============
 
 **Ket** is a class that maintains the information that corresponds with a single ket i.e. :math:`| 000..0 >` which would appear in the Dirac notation of a quantum state. A *ket* object understands how each unitary transformation affects its bitstring and complex coefficient.

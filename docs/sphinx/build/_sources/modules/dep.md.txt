@@ -174,7 +174,7 @@ You must connect from an authorized IP.
 
 ```
 psql -h 35.227.110.153 -U postgres qedemudb
-password: tercesdeqmis
+password: Ask Marcus
 ```
 
 ### Connecting to a hosted container

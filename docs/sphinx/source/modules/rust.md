@@ -1,6 +1,6 @@
-# Rust development
+# Rust Development
 
-## Setup
+## Developer Setup
 
 Mac
 

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Entanglement &#8212; QEDlib 0.1.0 documentation</title>
+    <title>Entanglement (Python) &#8212; Quantum Experiment Engine 0.1.0 documentation</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -16,8 +16,8 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="EntangledKet" href="entangled_ket.html" />
-    <link rel="prev" title="Ensemble" href="ensemble.html" />
+    <link rel="next" title="EntangledKet (Python)" href="entangled_ket.html" />
+    <link rel="prev" title="Ensemble (Python)" href="ensemble.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -34,16 +34,16 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="entanglement">
-<h1>Entanglement<a class="headerlink" href="#entanglement" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="entanglement-python">
+<h1>Entanglement (Python)<a class="headerlink" href="#entanglement-python" title="Permalink to this headline">¶</a></h1>
 <p><strong>Entanglement</strong> is a class that encapsulates the information that is needed to determine how entanglement will affect a particular <em>Ket</em> object.</p>
 <p>An <em>Entanglement</em> object has initialization parameters <em>outcome, system, qubit</em>. The provided <em>outcome</em> is the measurement outcome for which a <em>ket</em> will <strong>not</strong> disappear. <em>qubit</em> is an entangled qubit index. The <em>system</em> is a system owning the qubit which is entangled.</p>
 <p>The data local to an <em>Entanglement</em> object might be the following.</p>
-<ul class="simple">
-<li>self._outcome = 0</li>
-<li>self._system = State</li>
-<li>self._qubit = 2</li>
-</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">_outcome</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">_system</span> <span class="o">=</span> <span class="n">State</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">_qubit</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
 <p><strong>entanglement.get_outcome (self) → (self._outcome)</strong> is a method that allows for the retrieval of the outcome.</p>
 <p><strong>entanglement.get_system (self) → (self._system)</strong> is a method that allows for the retrieval of the system.</p>
 <p><strong>entanglement.get_qubit (self) → (self._qubit)</strong> is a method that allows for the retrieval of the qubit.</p>
@@ -56,7 +56,7 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../index.html">QEDlib</a></h1>
+<h1 class="logo"><a href="../index.html">Quantum Experiment Engine</a></h1>
 
 
 
@@ -67,25 +67,26 @@
 
 <h3>Navigation</h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="ensemble.html">Ensemble</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Entanglement</a></li>
-<li class="toctree-l1"><a class="reference internal" href="entangled_ket.html">EntangledKet</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ket.html">Ket</a></li>
-<li class="toctree-l1"><a class="reference internal" href="state.html">State</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dev.html">Parent Repository (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html">General Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dep.html">Deploy Tools (Bash)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sim.html">Simulation Service (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user.html">User Service (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">Api Service (Python)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rust.html">Rust development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rust.html">Rust Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ket.html">Ket (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ibmqx_state.html">IBMQXState (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ensemble.html">Ensemble (Python)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Entanglement (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entangled_ket.html">EntangledKet (Python)</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="ensemble.html" title="previous chapter">Ensemble</a></li>
-      <li>Next: <a href="entangled_ket.html" title="next chapter">EntangledKet</a></li>
+      <li>Previous: <a href="ensemble.html" title="previous chapter">Ensemble (Python)</a></li>
+      <li>Next: <a href="entangled_ket.html" title="next chapter">EntangledKet (Python)</a></li>
   </ul></li>
 </ul>
 </div>

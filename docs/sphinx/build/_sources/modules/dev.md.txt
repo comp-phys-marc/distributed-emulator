@@ -1,4 +1,4 @@
-# Parent Repository (Python)
+# General Development
 
 A container for all the services' repositories which are registered as submodules. This repo provides a simple way to pull and update all the others by simply pulling this repo and updating submodules.
 
@@ -28,7 +28,7 @@ git submodule update --init --recursive
 
 ## Local development
 
-## Install PSQL Client
+### Install PSQL Client
 
 Mac
 
@@ -44,7 +44,7 @@ sudo apt-get update
 sudo apt-get install postgresql-client
 ```
 
-## Setup the virtualenv
+### Setup the virtualenv
 
 ```
 pip install virtualenv
@@ -53,13 +53,13 @@ cd venv
 virtualenv . --python=python3
 ```
 
-## Activate the virtualenv
+### Activate the virtualenv
 
 ```
 source venv/bin/activate
 ```
 
-## Install and start RabbitMQ
+### Install and start RabbitMQ
 
 ```
 sudo apt-get update

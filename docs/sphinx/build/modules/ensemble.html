@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Ensemble &#8212; QEDlib 0.1.0 documentation</title>
+    <title>Ensemble (Python) &#8212; Quantum Experiment Engine 0.1.0 documentation</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -16,8 +16,8 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Entanglement" href="entanglement.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="../index.html" />
+    <link rel="next" title="Entanglement (Python)" href="entanglement.html" />
+    <link rel="prev" title="IBMQXState (Python)" href="ibmqx_state.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -34,8 +34,8 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="ensemble">
-<h1>Ensemble<a class="headerlink" href="#ensemble" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="ensemble-python">
+<h1>Ensemble (Python)<a class="headerlink" href="#ensemble-python" title="Permalink to this headline">¶</a></h1>
 <p><strong>Ensemble</strong> is a class that maintains a set of quantum systems and supports interactions between them.</p>
 <p><strong>ensemble.add_subsystem (self, subsystem) → ()</strong> adds a subsystem (i.e. <em>State</em> object) to the list <em>self.subsystems</em>.</p>
 <p><strong>ensemble.m (self, system, qubit) → (result)</strong> measures a qubit and collapses quantum state across interacting subsystems accordingly. Calls <em>entangled_ket.should_collapse</em> <span class="math notranslate nohighlight">\(\; \forall \; ket \in subsystem.kets \; \forall \; subsystem \in self.subsystems.kets\)</span> to determine what kets should be collapsed.</p>
@@ -52,7 +52,7 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../index.html">QEDlib</a></h1>
+<h1 class="logo"><a href="../index.html">Quantum Experiment Engine</a></h1>
 
 
 
@@ -63,25 +63,26 @@
 
 <h3>Navigation</h3>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Ensemble</a></li>
-<li class="toctree-l1"><a class="reference internal" href="entanglement.html">Entanglement</a></li>
-<li class="toctree-l1"><a class="reference internal" href="entangled_ket.html">EntangledKet</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ket.html">Ket</a></li>
-<li class="toctree-l1"><a class="reference internal" href="state.html">State</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dev.html">Parent Repository (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html">General Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dep.html">Deploy Tools (Bash)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sim.html">Simulation Service (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user.html">User Service (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">Api Service (Python)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rust.html">Rust development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rust.html">Rust Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ket.html">Ket (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ibmqx_state.html">IBMQXState (Python)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Ensemble (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entanglement.html">Entanglement (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entangled_ket.html">EntangledKet (Python)</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="../index.html" title="previous chapter">&lt;no title&gt;</a></li>
-      <li>Next: <a href="entanglement.html" title="next chapter">Entanglement</a></li>
+      <li>Previous: <a href="ibmqx_state.html" title="previous chapter">IBMQXState (Python)</a></li>
+      <li>Next: <a href="entanglement.html" title="next chapter">Entanglement (Python)</a></li>
   </ul></li>
 </ul>
 </div>

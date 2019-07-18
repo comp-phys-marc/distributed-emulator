@@ -1,6 +1,6 @@
-==============
-Ensemble
-==============
+=================
+Ensemble (Python)
+=================
 
 **Ensemble** is a class that maintains a set of quantum systems and supports interactions between them.
 

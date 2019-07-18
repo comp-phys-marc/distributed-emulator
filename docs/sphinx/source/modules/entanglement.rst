@@ -1,6 +1,6 @@
-==============
-Entanglement
-==============
+=====================
+Entanglement (Python)
+=====================
 
 **Entanglement** is a class that encapsulates the information that is needed to determine how entanglement will affect a particular *Ket* object.
 
@@ -8,10 +8,11 @@ An *Entanglement* object has initialization parameters *outcome, system, qubit*.
 
 The data local to an *Entanglement* object might be the following.
 
-* self._outcome = 0
-* self._system = State
-* self._qubit = 2
+.. code-block:: python
 
+    self._outcome = 0
+    self._system = State
+    self._qubit = 2
 
 
 **entanglement.get\_outcome (self) → (self.\_outcome)** is a method that allows for the retrieval of the outcome.
