@@ -1,5 +1,7 @@
 # Api Service (Python)
 
+A python service that facilitates communication between client applications, including the QEE web interface, and the backend services of the experiment engine.
+
 ## Api Setup
 
 To install all requirements:

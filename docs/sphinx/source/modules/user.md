@@ -1,5 +1,7 @@
 # User Service (Python)
 
+A python service capable of handling basic tasks related to user authentication, permissions and token management.
+
 ## User Setup
 
 To install all requirements:

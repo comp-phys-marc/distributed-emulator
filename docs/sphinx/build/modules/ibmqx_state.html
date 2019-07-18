@@ -41,7 +41,7 @@ To initialize a <em>ibmqx_state</em>, one must provide <em>num_qubits</em>  and 
 the initial system state. <em>num_qubits</em> should be an <em>Integer</em> that specifies the size  of  quantum  register  required  for the  coming  experiment.   The <em>symbol</em> is
 a <em>String</em> that  will  be  used to identify the quantum register that is provisioned with IBM Q during the execution of experiments using this <em>ibmqx_state</em>. An
 additional local data  structure requirements is  maintained within each <em>ibmqx_state</em> which can be used  to  record  information  about  the backend quantum processor,
-qubits and gates used by the state during an experiment. The  local  data  for  a  <em>ibmqx_state</em>  object might be the following. An instantiator can optionally provide a pre-initialinstance of the IBM Quantum Experience API wrapper provided by their python library <em>IBMQiuantumExperience</em> and/or an <em>api_token</em> that corresponds to the current user’s IBM Q account.
+qubits and gates used by the state during an experiment. The  local  data  for  a  <em>ibmqx_state</em>  object might be the following. An instantiator can optionally provide a pre-initialized instance of the IBM Quantum Experience API wrapper provided by their python library <em>IBMQuantumExperience</em> and/or an <em>api_token</em> that corresponds to the current user’s IBM Q account.
 A final local variable <em>jobs</em> accumulates results from various circuits that are run using the <em>ibmqx_state</em>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">kets</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">num_qubits</span> <span class="o">=</span> <span class="mi">5</span>
@@ -307,6 +307,7 @@ Then the appropriate transformation is applied to each state to rotate the corre
 <li class="toctree-l1"><a class="reference internal" href="sim.html">Simulation Service (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user.html">User Service (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">Api Service (Python)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis.html">Analysis Service (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rust.html">Rust Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ket.html">Ket (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="state.html">State (Python)</a></li>

@@ -22,6 +22,7 @@ Rust and more.
    modules/sim.md
    modules/user.md
    modules/api.md
+   modules/analysis.md
    modules/rust.md
    modules/ket.rst
    modules/state.rst

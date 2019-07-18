@@ -7,7 +7,7 @@ To initialize a *ibmqx_state*, one must provide *num_qubits*  and  *symbol*. Opt
 the initial system state. *num_qubits* should be an *Integer* that specifies the size  of  quantum  register  required  for the  coming  experiment.   The *symbol* is
 a *String* that  will  be  used to identify the quantum register that is provisioned with IBM Q during the execution of experiments using this *ibmqx_state*. An
 additional local data  structure requirements is  maintained within each *ibmqx_state* which can be used  to  record  information  about  the backend quantum processor,
-qubits and gates used by the state during an experiment. The  local  data  for  a  *ibmqx_state*  object might be the following. An instantiator can optionally provide a pre-initialinstance of the IBM Quantum Experience API wrapper provided by their python library *IBMQiuantumExperience* and/or an *api_token* that corresponds to the current user's IBM Q account.
+qubits and gates used by the state during an experiment. The  local  data  for  a  *ibmqx_state*  object might be the following. An instantiator can optionally provide a pre-initialized instance of the IBM Quantum Experience API wrapper provided by their python library *IBMQuantumExperience* and/or an *api_token* that corresponds to the current user's IBM Q account.
 A final local variable *jobs* accumulates results from various circuits that are run using the *ibmqx_state*.
 
 .. code-block:: python
