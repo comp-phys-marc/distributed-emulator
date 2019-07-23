@@ -16,3 +16,6 @@
 [submodule "quantumemulatorhardwarecli"]
 	path = quantumemulatorhardwarecli
 	url = https://gitlab.com/QuantumEmulator/quantumemulatorhardwarecli.git
+[submodule "rustsimulationservice"]
+	path = rustsimulationservice
+	url = https://gitlab.com/QuantumEmulator/rustsimulationservice.git

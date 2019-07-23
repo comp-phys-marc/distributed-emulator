@@ -17,6 +17,7 @@ Todo
 * Implement NetKet based Hamiltonian simulator service
 * Implement PennyLane based Quantum Machine Learning service
 * Implement Continuous Variable Quantum Computing service based on StrawberryFields
+* Implement Ocean based Quantum Annealing service
 * Implement more visualizations for each type of simulation
 * Add orchestration to the UI
 * Document web API
@@ -34,12 +35,12 @@ Documentation
    :maxdepth: 2
 
    modules/dev.md
+   modules/rust.md
    modules/dep.md
+   modules/api.md
    modules/sim.md
    modules/user.md
-   modules/api.md
    modules/analysis.md
-   modules/rust.md
    modules/parser.rst
    modules/ket.rst
    modules/state.rst
