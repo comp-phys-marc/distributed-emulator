@@ -19,6 +19,7 @@ Todo
 * Implement Continuous Variable Quantum Computing service based on StrawberryFields
 * Implement Ocean based Quantum Annealing service
 * Implement more visualizations for each type of simulation
+* Document Rust simulation service deployment
 * Add orchestration to the UI
 * Document web API
 
