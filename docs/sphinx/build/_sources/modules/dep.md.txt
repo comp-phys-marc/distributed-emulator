@@ -30,7 +30,7 @@ sudo apt-get update && sudo apt-get install google-cloud-sdk
 
 gcloud init
 
-gcloud config set project beaming-signal-231717
+gcloud config set project <project-name>
 gcloud config set compute/zone us-central1-b
 ```
 
@@ -173,14 +173,14 @@ gcloud compute instances add-tags qedrabbit --zone us-east1-b --tags allow-tcp-1
 You must connect from an authorized IP.
 
 ```
-psql -h 35.227.110.153 -U postgres qedemudb
+psql -h <database-address> -U postgres qedemudb
 password: Ask Marcus
 ```
 
 ### Connecting to a hosted container
 
 ```
-gcloud compute --project "beaming-signal-231717" ssh --zone "us-east1-b" "qedrabbit"
+gcloud compute --project "<project-name>" ssh --zone "us-east1-b" "qedrabbit"
 ```
 
 ### building images locally

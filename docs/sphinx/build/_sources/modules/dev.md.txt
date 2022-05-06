@@ -77,7 +77,7 @@ sudo systemctl enable rabbitmq-server.service
 sudo rabbitmq-plugins enable rabbitmq_management
 sudo chown -R rabbitmq:rabbitmq /var/lib/rabbitmq/
 
-sudo rabbitmqctl add_user SA tercesdeqmis
+sudo rabbitmqctl add_user SA <password>
 sudo rabbitmqctl set_user_tags SA administrator
 sudo rabbitmqctl set_permissions -p / SA ".*" ".*" ".*"
 ```

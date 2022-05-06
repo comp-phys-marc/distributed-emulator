@@ -111,7 +111,7 @@
 <span class="n">sudo</span> <span class="n">rabbitmq</span><span class="o">-</span><span class="n">plugins</span> <span class="n">enable</span> <span class="n">rabbitmq_management</span>
 <span class="n">sudo</span> <span class="n">chown</span> <span class="o">-</span><span class="n">R</span> <span class="n">rabbitmq</span><span class="p">:</span><span class="n">rabbitmq</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">rabbitmq</span><span class="o">/</span>
 
-<span class="n">sudo</span> <span class="n">rabbitmqctl</span> <span class="n">add_user</span> <span class="n">SA</span> <span class="n">tercesdeqmis</span>
+<span class="n">sudo</span> <span class="n">rabbitmqctl</span> <span class="n">add_user</span> <span class="n">SA</span> <span class="n">password</span>
 <span class="n">sudo</span> <span class="n">rabbitmqctl</span> <span class="n">set_user_tags</span> <span class="n">SA</span> <span class="n">administrator</span>
 <span class="n">sudo</span> <span class="n">rabbitmqctl</span> <span class="n">set_permissions</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span> <span class="n">SA</span> <span class="s2">&quot;.*&quot;</span> <span class="s2">&quot;.*&quot;</span> <span class="s2">&quot;.*&quot;</span>
 </pre></div>
