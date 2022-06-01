@@ -174,12 +174,12 @@ ALTER TABLE ONLY public."User" ADD CONSTRAINT "User_pkey" PRIMARY KEY (id);
 --
 
 CREATE USER userservice;
-ALTER USER userservice with password 'tercesresudeqmis';
+ALTER USER userservice with password '<user-password>';
 GRANT ALL ON TABLE "User" to userservice;
 GRANT ALL ON SEQUENCE user_seq TO userservice;
 
 CREATE USER simulationservice;
-ALTER USER simulationservice with password 'tercesumisdeqmis';
+ALTER USER simulationservice with password '<simulation-password>';
 GRANT ALL ON TABLE "Calculation" to simulationservice;
 GRANT ALL ON TABLE "SinglePhase" to simulationservice;
 GRANT ALL ON TABLE "Experiment" to simulationservice;
@@ -189,7 +189,7 @@ GRANT ALL ON SEQUENCE experiment_seq TO simulationservice;
 
 
 CREATE USER analysisservice;
-ALTER USER analysisservice with password 'terceslanadeqmis';
+ALTER USER analysisservice with password '<analysis-password>';
 GRANT ALL ON TABLE "Calculation" to analysisservice;
 GRANT ALL ON TABLE "SinglePhase" to analysisservice;
 GRANT ALL ON SEQUENCE single_phase_seq TO analysisservice;

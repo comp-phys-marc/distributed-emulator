@@ -206,14 +206,14 @@ docker push gcr.io/${PROJECT_ID}/analysisservice:v1
 ### Deploying an image
 
 ```
-gcloud compute instances create-with-container qedsimulation \
+gcloud compute instances create-with-container qeesimulation \
      --container-image gcr.io/${PROJECT_ID}/simulationservice:v1
 ```
 
 ## Updating a container
 
 ```
-gcloud compute instances update-container qedsimulation \
+gcloud compute instances update-container qeesimulation \
     --container-image gcr.io/${PROJECT_ID}/simulationservice:v2
 ```
 
@@ -222,26 +222,26 @@ gcloud compute instances update-container qedsimulation \
 ### Creating a GKE cluster
 
 ```
-gcloud container clusters create qedemucluster --num-nodes=4
-gcloud container clusters get-credentials qedemucluster
+gcloud container clusters create qeeemucluster --num-nodes=4
+gcloud container clusters get-credentials qeeemucluster
 ```
 
 ### Deploying an image
 
 ```
-kubectl run qedsimulation-deployment --image=gcr.io/${PROJECT_ID}/simulationservice:v1 --port 8080
+kubectl run qeesimulation-deployment --image=gcr.io/${PROJECT_ID}/simulationservice:v1 --port 8080
 ```
 
 ### Exposing a deployment
 
 ```
-kubectl expose deployment qedsimulation-deployment --port 80 --target-port 8080
+kubectl expose deployment qeesimulation-deployment --port 80 --target-port 8080
 ```
 
 ### Scaling a deployment
 
 ```
-kubectl scale deployment qedsimulation-deployment --replicas=3
+kubectl scale deployment qeesimulation-deployment --replicas=3
 ```
 
 ## Remote access
@@ -252,14 +252,14 @@ Expose amqp port
 
 ```
 gcloud compute firewall-rules create rule-allow-tcp-5672 --source-ranges 0.0.0.0/0 --target-tags allow-tcp-5672 --allow tcp:5672
-gcloud compute instances add-tags qedrabbit --zone us-east1-b --tags allow-tcp-5672
+gcloud compute instances add-tags qeerabbit --zone us-east1-b --tags allow-tcp-5672
 ```
 
 Expose management UI
 
 ```
 gcloud compute firewall-rules create rule-allow-tcp-15672 --source-ranges 0.0.0.0/0 --target-tags allow-tcp-15672 --allow tcp:15672
-gcloud compute instances add-tags qedrabbit --zone us-east1-b --tags allow-tcp-15672
+gcloud compute instances add-tags qeerabbit --zone us-east1-b --tags allow-tcp-15672
 ```
 
 ### Connecting to the PSQL database
@@ -267,21 +267,21 @@ gcloud compute instances add-tags qedrabbit --zone us-east1-b --tags allow-tcp-1
 You must connect from an authorized IP.
 
 ```
-psql -h <database-address> -U postgres qedemudb
+psql -h <database-address> -U postgres qeeemudb
 password: <password>
 ```
 
 ### Connecting to a hosted container
 
 ```
-gcloud compute --project "project-name" ssh --zone "us-east1-b" "qedrabbit"
+gcloud compute --project "project-name" ssh --zone "us-east1-b" "qeerabbit"
 ```
 
 ## Exposing API container
 
 ```
 gcloud compute firewall-rules create rule-allow-tcp-5000 --source-ranges 0.0.0.0/0 --target-tags allow-tcp-5000 --allow tcp:5000
-gcloud compute instances add-tags qedapi --zone us-east4-c --tags allow-tcp-5000
+gcloud compute instances add-tags qeeapi --zone us-east4-c --tags allow-tcp-5000
 ```
 
 # Manual Deployment
