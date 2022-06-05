@@ -4,6 +4,64 @@ This is a port of a top-level repository containing multiple (14) additional sub
 
 ![poster](https://user-images.githubusercontent.com/94946848/167281373-14c45e7b-0d01-4d26-bebd-6a1357e28e86.png)
 
+# Modules
+
+## [WASM PFC](https://gitlab.com/QuantumEmulator/wasm_pfc)
+
+A demo of how the PFC compilation methodology may be applied to lower WASM (WebAssembly) to pyqubo compatible constraint expressions.
+
+## [Emulator Common](https://gitlab.com/QuantumEmulator/emulatorcommon)
+
+Submodule hosting messaging and database utilities shared across services.
+
+## [QEElibrs](https://gitlab.com/QuantumEmulator/qeelibrs)
+
+An original (albeit simple) state vector simulator implementation in Rust.
+
+## [QEElib](https://gitlab.com/QuantumEmulator/qedlib)
+
+An original (albeit simple) state vector simulator implementation in Python that works with IBMQX backends.
+
+## [User Service](https://gitlab.com/QuantumEmulator/userservice)
+
+A service that facilitates user management.
+
+## [Simulation Service](https://gitlab.com/QuantumEmulator/simulationservice)
+
+A scalable simulation service that makes use of qeelib to simulate distributed quantum algorithms.
+
+## [Rust Simulation Service](https://gitlab.com/QuantumEmulator/rustsimulationservice)
+
+A scalable simulation service that makes use of qeelibrs to simulate distributed quantum algorithms.
+
+## [Quantum Emulator Hardware CLI](https://gitlab.com/QuantumEmulator/quantumemulatorhardwarecli)
+
+A command line interface for interacting with a hardware emulator prototype.
+
+## [API Service](https://gitlab.com/QuantumEmulator/apiservice)
+
+A service that facilitates authentication and programmatic use of the cloud execution environment.
+
+## [Analysis Service](https://gitlab.com/QuantumEmulator/analysisservice)
+
+A service that facilitates the basic analysis of quantum state evolutions as seen (and persisted) over the course of simulations.
+
+## [QEE UI](https://gitlab.com/QuantumEmulator/qedui)
+
+A user interface that demos how the engine may be used in a web environment.
+
+## [QASM TS](https://gitlab.com/QuantumEmulator/qasm-ts)
+
+OpenQASM, the low-level programming language for quantum circuit specification, implemented in TypeScript.
+
+## [Blackbird TS](https://gitlab.com/QuantumEmulator/blackbird-ts)
+
+BlackBird, the low-level programming language for continuous variable quantum computing, implemented in TypeScript.
+
+## [QMASM TS](https://gitlab.com/QuantumEmulator/qmasm-ts)
+
+QMASM, the macro assembler for D-wave's quantum annealer, implemented in TypeScript.
+
 # Setup
 
 ### Install Git
