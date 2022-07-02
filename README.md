@@ -4,6 +4,10 @@ This is a port of a top-level repository containing multiple (14) additional sub
 
 ![poster](https://user-images.githubusercontent.com/94946848/167281373-14c45e7b-0d01-4d26-bebd-6a1357e28e86.png)
 
+## Bill C-27: Canada's First AI Legislation
+
+Note that steps are being taken to make this software compliant with [Bill C-27](https://www.nortonrosefulbright.com/en-ca/knowledge/publications/55b9a0bd/bill-c-27-canadas-first-artificial-intelligence-legislation-has-arrived) and the details will be provided here shortly.
+
 # Modules
 
 ## [WASM PFC](https://gitlab.com/QuantumEmulator/wasm_pfc)
