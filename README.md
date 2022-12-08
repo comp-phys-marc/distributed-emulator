@@ -6,7 +6,22 @@ This is a port of a top-level repository containing multiple (14) additional sub
 
 ## Bill C-27: Canada's First AI Legislation
 
-Note that steps are being taken to make this software compliant with [Bill C-27](https://www.nortonrosefulbright.com/en-ca/knowledge/publications/55b9a0bd/bill-c-27-canadas-first-artificial-intelligence-legislation-has-arrived) and the details will be provided here shortly.
+Note that steps are being taken to make this software compliant with [Bill C-27](https://www.nortonrosefulbright.com/en-ca/knowledge/publications/55b9a0bd/bill-c-27-canadas-first-artificial-intelligence-legislation-has-arrived).
+
+These steps fall into the following categories:
+
+
+### Establishing measures to manage anonymized data
+
+- On May 5th, 2022 suggested passwords, user and project names were [removed](https://github.com/comp-phys-marc/distributed-emulator/commit/4d227d0cc1564ee7370dd9b8d32f138c142e01aa) from the documentation
+
+### Conducting an impact assessment to determine if the AI system is “high-impact” (a threshold that will eventually be defined by regulations)
+
+- TBD
+
+### Maintaining general records of steps taken to meet compliance requirements and that describe how impact assessment conclusions are reached 
+
+- TBD
 
 # Modules
 
