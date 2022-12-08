@@ -17,11 +17,14 @@ These steps fall into the following categories:
 
 ### Conducting an impact assessment to determine if the AI system is “high-impact” (a threshold that will eventually be defined by regulations)
 
-- TBD
+- Hosting code on GitHub and GitLab allows for tracking of forks, downloads, etc.
+- So far the source has very little usage excepting the TS language implementations whose usage is shown on [npm](https://www.npmjs.com/~marcusedwards)
+- These TS components may be considered impactful in our opinion, but do not constitute AI technology without the adjoining software
 
 ### Maintaining general records of steps taken to meet compliance requirements and that describe how impact assessment conclusions are reached 
 
-- TBD
+- 2FA used for each host account
+- Record kept of ssh key cycling for source host account
 
 # Modules
 
