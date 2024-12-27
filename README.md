@@ -1,33 +1,8 @@
-# Distributed Emulator Parent Repository (Python)
+# Heterogeneous Quantum Cloud Demo Repository (Python)
 
-This is a port of a top-level repository containing multiple (14) additional submodules which are also freely available on [GitLab](https://gitlab.com/QuantumEmulator). This software comprises the work that was [presented](https://www.researchgate.net/publication/357032456_Developing_a_Hybrid_Methodology_for_Solving_Quantum_Problems) in the 2019 Canada-America-Mexico Canadian Association of Physics Graduate Student Physics Conference, and was the software framework that I used to complete experimental components of my [Masters thesis](https://uwspace.uwaterloo.ca/handle/10012/16383) at the University of Waterloo in 2020.
-
-![poster](https://user-images.githubusercontent.com/94946848/167281373-14c45e7b-0d01-4d26-bebd-6a1357e28e86.png)
-
-## Bill C-27: Canada's First AI Legislation
-
-Note that steps are being taken to make this software compliant with [Bill C-27](https://www.nortonrosefulbright.com/en-ca/knowledge/publications/55b9a0bd/bill-c-27-canadas-first-artificial-intelligence-legislation-has-arrived).
-
-### Establishing measures to manage anonymized data
-
-- On May 5th, 2022 suggested passwords, user and project names were [removed](https://github.com/comp-phys-marc/distributed-emulator/commit/4d227d0cc1564ee7370dd9b8d32f138c142e01aa) from the documentation
-
-### Conducting an impact assessment to determine if the AI system is “high-impact” (a threshold that will eventually be defined by regulations)
-
-- Hosting code on GitHub and GitLab allows for tracking of forks, downloads, etc.
-- So far the source has very little usage excepting the TS language implementations whose usage is shown on [npm](https://www.npmjs.com/~marcusedwards)
-- These TS components may be considered impactful in our opinion, but do not constitute AI technology without the adjoining software
-
-### Maintaining general records of steps taken to meet compliance requirements and that describe how impact assessment conclusions are reached 
-
-- 2FA used for each host account
-- Record kept of ssh key cycling for source host account
+A minimal demonstration of a quantum cloud with mixed execution using Cirq, Qiskit, and a simple custom simulator.
 
 # Modules
-
-## [WASM PFC](https://gitlab.com/QuantumEmulator/wasm_pfc)
-
-A demo of how the PFC compilation methodology may be applied to lower WASM (WebAssembly) to pyqubo compatible constraint expressions.
 
 ## [Emulator Common](https://gitlab.com/QuantumEmulator/emulatorcommon)
 
@@ -53,33 +28,9 @@ A scalable simulation service that makes use of qeelib to simulate distributed q
 
 A scalable simulation service that makes use of qeelibrs to simulate distributed quantum algorithms.
 
-## [Quantum Emulator Hardware CLI](https://gitlab.com/QuantumEmulator/quantumemulatorhardwarecli)
-
-A command line interface for interacting with a hardware emulator prototype.
-
 ## [API Service](https://gitlab.com/QuantumEmulator/apiservice)
 
 A service that facilitates authentication and programmatic use of the cloud execution environment.
-
-## [Analysis Service](https://gitlab.com/QuantumEmulator/analysisservice)
-
-A service that facilitates the basic analysis of quantum state evolutions as seen (and persisted) over the course of simulations.
-
-## [QEE UI](https://gitlab.com/QuantumEmulator/qedui)
-
-A user interface that demos how the engine may be used in a web environment.
-
-## [QASM TS](https://gitlab.com/QuantumEmulator/qasm-ts)
-
-OpenQASM, the low-level programming language for quantum circuit specification, implemented in TypeScript.
-
-## [Blackbird TS](https://gitlab.com/QuantumEmulator/blackbird-ts)
-
-BlackBird, the low-level programming language for continuous variable quantum computing, implemented in TypeScript.
-
-## [QMASM TS](https://gitlab.com/QuantumEmulator/qmasm-ts)
-
-QMASM, the macro assembler for D-wave's quantum annealer, implemented in TypeScript.
 
 # Setup
 
@@ -107,13 +58,23 @@ git submodule update --init --recursive
 
 ## Local development
 
+## Install Docker Compose
+
+Ubuntu 
+
+```
+curl -SL https://github.com/docker/compose/releases/download/v2.32.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+```
+
 ## Install PSQL Client
 
 Mac
 
 ```
 brew install postgresql
-pg_ctl -D /usr/local/var/postgres start && brew services start postgresql
+brew services start postgresql
 ```
 
 Ubuntu
@@ -128,6 +89,7 @@ sudo apt-get install postgresql-client
 ```
 pip install virtualenv
 pip install virtualenvwrapper
+mkdir venv
 cd venv
 virtualenv . --python=python3
 ```
@@ -139,6 +101,23 @@ source venv/bin/activate
 ```
 
 ## Install and start RabbitMQ
+
+Mac
+
+```
+brew update
+brew install rabbitmq
+brew services start rabbitmq
+/opt/homebrew/sbin/rabbitmqctl enable_feature_flag all
+
+rabbitmq-plugins enable rabbitmq_management
+
+sudo rabbitmqctl add_user SA <password>
+sudo rabbitmqctl set_user_tags SA administrator
+sudo rabbitmqctl set_permissions -p / SA ".*" ".*" ".*"
+```
+
+Ubuntu
 
 ```
 sudo apt-get update
@@ -160,6 +139,8 @@ sudo rabbitmqctl add_user SA <password>
 sudo rabbitmqctl set_user_tags SA administrator
 sudo rabbitmqctl set_permissions -p / SA ".*" ".*" ".*"
 ```
+
+Note: if you run rabbit on your host's 127.0.0.1 then you should set `RABBIT_HOST=host.docker.internal` in `.env`.
 
 ### building images locally
 
@@ -391,9 +372,17 @@ brew install rustup
 rustup-init
 ```
 
+# Running Tests
+
+Tests can be executed inside a running Docker container using:
+
+```
+docker exec distributedemulator-simulationservice-1 python -m unittest discover 
+```
+
 ## License
 
-Copyright 2019 Marcus Edwards
+Copyright 2024 Marcus Edwards
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at:
 

@@ -1,21 +1,12 @@
 [submodule "userservice"]
 	path = userservice
-	url = https://gitlab.com/QuantumEmulator/userservice.git
+	url = https://github.com/comp-phys-marc/userservice.git
 [submodule "apiservice"]
 	path = apiservice
-	url = https://gitlab.com/QuantumEmulator/apiservice.git
+	url = https://github.com/comp-phys-marc/apiservice.git
 [submodule "simulationservice"]
 	path = simulationservice
-	url = https://gitlab.com/QuantumEmulator/simulationservice.git
-[submodule "analysisservice"]
-	path = analysisservice
-	url = https://gitlab.com/QuantumEmulator/analysisservice.git
-[submodule "circuitservice"]
-	path = circuitservice
-	url = https://gitlab.com/QuantumEmulator/circuitservice.git
-[submodule "quantumemulatorhardwarecli"]
-	path = quantumemulatorhardwarecli
-	url = https://gitlab.com/QuantumEmulator/quantumemulatorhardwarecli.git
+	url = https://github.com/comp-phys-marc/simulationservice.git
 [submodule "rustsimulationservice"]
 	path = rustsimulationservice
-	url = https://gitlab.com/QuantumEmulator/rustsimulationservice.git
+	url = https://github.com/comp-phys-marc/rustsimulationservice.git

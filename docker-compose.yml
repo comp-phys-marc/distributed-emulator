@@ -12,19 +12,15 @@ services:
             dockerfile: dockerfile
         volumes:
             - ./simulationservice/app
+    rustsimulationservice:
+        build:
+            context: ./rustsimulationservice/
+            dockerfile: Dockerfile
+        volumes:
+            - ./rustsimulationservice/app
     apiservice:
         build:
             context: ./apiservice/
             dockerfile: dockerfile
         volumes:
             - ./apiservice/app
-    analysisservice:
-        build:
-            context: ./analysisservice/
-            dockerfile: dockerfile
-        volumes:
-            - ./analysisservice/app
-        links:
-            - apiservice
-        depends_on:
-            - apiservice
