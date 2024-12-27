@@ -2,25 +2,6 @@
 
 A minimal demonstration of a quantum cloud with mixed execution using Cirq, Qiskit, and a simple custom simulator.
 
-## Bill C-27: Canada's First AI Legislation
-
-Note that steps are being taken to make this software compliant with [Bill C-27](https://www.nortonrosefulbright.com/en-ca/knowledge/publications/55b9a0bd/bill-c-27-canadas-first-artificial-intelligence-legislation-has-arrived).
-
-### Establishing measures to manage anonymized data
-
-- On May 5th, 2022 suggested passwords, user and project names were [removed](https://github.com/comp-phys-marc/distributed-emulator/commit/4d227d0cc1564ee7370dd9b8d32f138c142e01aa) from the documentation
-
-### Conducting an impact assessment to determine if the AI system is “high-impact” (a threshold that will eventually be defined by regulations)
-
-- Hosting code on GitHub and GitLab allows for tracking of forks, downloads, etc.
-- So far the source has very little usage excepting the TS language implementations whose usage is shown on [npm](https://www.npmjs.com/~marcusedwards)
-- These TS components may be considered impactful in our opinion, but do not constitute AI technology without the adjoining software
-
-### Maintaining general records of steps taken to meet compliance requirements and that describe how impact assessment conclusions are reached 
-
-- 2FA used for each host account
-- Record kept of ssh key cycling for source host account
-
 # Modules
 
 ## [Emulator Common](https://gitlab.com/QuantumEmulator/emulatorcommon)
