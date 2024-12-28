@@ -1,4 +1,4 @@
-# Heterogeneous Quantum Cloud Demo Repository (Python)
+# Hybrid Quantum Cloud Demo Repository (Python)
 
 A minimal demonstration of a quantum cloud with mixed execution using Cirq, Qiskit, and a simple custom simulator.
 
