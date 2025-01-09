@@ -5,22 +5,22 @@ services:
             context: ./userservice/
             dockerfile: dockerfile
         volumes:
-            - ./userservice/app
+            - userservice/app
     simulationservice:
         build:
             context: ./simulationservice/
             dockerfile: dockerfile
         volumes:
-            - ./simulationservice/app
+            - simulationservice/app
     rustsimulationservice:
         build:
             context: ./rustsimulationservice/
             dockerfile: Dockerfile
         volumes:
-            - ./rustsimulationservice/app
+            - rustsimulationservice/app
     apiservice:
         build:
             context: ./apiservice/
             dockerfile: dockerfile
         volumes:
-            - ./apiservice/app
+            - apiservice/app
