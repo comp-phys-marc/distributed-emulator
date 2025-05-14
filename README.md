@@ -1,6 +1,6 @@
 # Hybrid Quantum Cloud Demo Repository (Python)
 
-This is a port of a top-level repository containing multiple (14) additional submodules which are also freely available on [GitLab](https://gitlab.com/QuantumEmulator). This software comprises the work that was [presented](https://www.researchgate.net/publication/357032456_Developing_a_Hybrid_Methodology_for_Solving_Quantum_Problems) in the 2019 Canada-America-Mexico Canadian Association of Physics Graduate Student Physics Conference, and was the software framework that I used to complete experimental components of my [Masters thesis](https://uwspace.uwaterloo.ca/handle/10012/16383) at the University of Waterloo in 2020.
+This is a port of a top-level repository containing multiple (14) additional submodules which are also freely available on [GitLab](https://gitlab.com/QuantumEmulator). This software comprises the work that was [presented](https://www.researchgate.net/publication/355362093_Developing_a_Hybrid_Methodology_for_Solving_Quantum_Problems) in the 2019 Canada-America-Mexico Canadian Association of Physics Graduate Student Physics Conference, and was the software framework that I used to complete experimental components of my [Masters thesis](https://uwspace.uwaterloo.ca/handle/10012/16383) at the University of Waterloo in 2020.
 
 It comprises a minimal demonstration of a quantum cloud with mixed execution using Cirq, Qiskit, and a simple custom simulator.
 
