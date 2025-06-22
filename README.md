@@ -8,31 +8,31 @@ It comprises a minimal demonstration of a quantum cloud with mixed execution usi
 
 # Modules
 
-## [Emulator Common](https://gitlab.com/QuantumEmulator/emulatorcommon)
+## [Emulator Common](https://github.com/comp-phys-marc/emulatorcommon)
 
 Submodule hosting messaging and database utilities shared across services.
 
-## [QEElibrs](https://gitlab.com/QuantumEmulator/qeelibrs)
+## [QEElibrs](https://github.com/comp-phys-marc/qeelibrs)
 
 An original (albeit simple) state vector simulator implementation in Rust.
 
-## [QEElib](https://gitlab.com/QuantumEmulator/qedlib)
+## [QEElib](https://github.com/comp-phys-marc/qeelib)
 
 An original (albeit simple) state vector simulator implementation in Python that works with IBMQX backends.
 
-## [User Service](https://gitlab.com/QuantumEmulator/userservice)
+## [User Service](https://github.com/comp-phys-marc/userservice)
 
 A service that facilitates user management.
 
-## [Simulation Service](https://gitlab.com/QuantumEmulator/simulationservice)
+## [Simulation Service](https://github.com/comp-phys-marc/simulationservice)
 
 A scalable simulation service that makes use of qeelib to simulate distributed quantum algorithms.
 
-## [Rust Simulation Service](https://gitlab.com/QuantumEmulator/rustsimulationservice)
+## [Rust Simulation Service](https://github.com/comp-phys-marc/rustsimulationservice)
 
 A scalable simulation service that makes use of qeelibrs to simulate distributed quantum algorithms.
 
-## [API Service](https://gitlab.com/QuantumEmulator/apiservice)
+## [API Service](https://github.com/comp-phys-marc/apiservice)
 
 A service that facilitates authentication and programmatic use of the cloud execution environment.
 
