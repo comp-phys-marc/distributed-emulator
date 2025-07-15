@@ -8,7 +8,7 @@ This is a port of a top-level repository containing multiple (14) additional sub
 
 ![poster](https://user-images.githubusercontent.com/94946848/167281373-14c45e7b-0d01-4d26-bebd-6a1357e28e86.png)
 
-This GitHub repo is somewhat maintained and up to date. The GitLab repo serves as a record of the original project in all its scope, including some components that are no llonger maintined (the front-end, the WASM to QUBO compiler, for example).
+This GitHub repo is somewhat maintained and up to date. The GitLab repo serves as a record of the original project in all its scope, including some components that are no longer maintined (the front-end, the WASM to QUBO compiler, for example).
 
 # Modules
 
