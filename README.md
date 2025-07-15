@@ -4,9 +4,11 @@ This software comprises a minimal demonstration of a quantum cloud with mixed ex
 
 <img width="748" alt="Screenshot 2025-07-07 at 9 46 17 AM" src="https://github.com/user-attachments/assets/dc56a10f-6974-4a03-8c42-9637fc7e1170" />
 
-This is a port of a top-level repository containing multiple (14) additional submodules which are also freely available on [GitLab](https://gitlab.com/QuantumEmulator). This software comprises the work that was [presented](https://www.researchgate.net/publication/355362093_Developing_a_Hybrid_Methodology_for_Solving_Quantum_Problems) in the 2019 Canada-America-Mexico Canadian Association of Physics Graduate Student Physics Conference, and was the software framework that I used to complete experimental components of my [Masters thesis](https://uwspace.uwaterloo.ca/handle/10012/16383) at the University of Waterloo in 2020.
+This is a port of a top-level repository containing multiple (14) additional submodules which are also freely available on [GitLab](https://gitlab.com/QuantumEmulator). This software comprises the work that was [presented](https://www.researchgate.net/publication/355362093_Developing_a_Hybrid_Methodology_for_Solving_Quantum_Problems) in the 2019 Canada-America-Mexico Canadian Association of Physics Graduate Student Physics Conference, and was the software framework that I used to complete experimental components of my [Masters thesis](https://uwspace.uwaterloo.ca/handle/10012/16383) at the University of Waterloo in 2020. 
 
 ![poster](https://user-images.githubusercontent.com/94946848/167281373-14c45e7b-0d01-4d26-bebd-6a1357e28e86.png)
+
+This GitHub repo is somewhat maintained and up to date. Th GitLab repo serves as a record of the original project in all its scope, including some components that are no llonger maintined (the front-end, the WASM to QUBO compiler, for example).
 
 # Modules
 
